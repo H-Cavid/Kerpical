@@ -1,5 +1,6 @@
 "use client";
 
+import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import { LanguageProvider } from "../components/LanguageContext";
@@ -17,6 +18,7 @@ export default function RootLayout({
         <LanguageProvider>
           <Navbar />
           {children}
+          <Analytics /> {/* Vercel Analytics bura əlavə olunur */}
         </LanguageProvider>
       </body>
     </html>
