@@ -10,8 +10,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="az">
-      <body>
+    /* 1. suppressHydrationWarning əlavə edildi: 
+       Bu brauzer extension-larının yaratdığı xətanın qarşısını alır */
+    <html lang="az" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <LanguageProvider>
           <Navbar />
           {children}
@@ -20,3 +22,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+

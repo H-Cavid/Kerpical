@@ -1,83 +1,102 @@
 "use client";
 
 import { useLanguage } from "./LanguageContext";
-import { Scale, MessageCircle, PiggyBank, ArrowRight } from "lucide-react";
+import { Scale, MessageCircle, Wallet  , ArrowRight, ShieldCheck } from "lucide-react";
 
 export default function About() {
   const { lang } = useLanguage();
 
   const content = {
     az: {
-      tag: "Haqqımızda",
+      tag: "Rəqəmsal Körpü",
       title: "Biz kimik?",
-      desc: "Biz kərpic istehsalçıları ilə alıcılar arasında rəqəmsal bir körpüyük. Ənənəvi tikinti sektorunu müasir texnologiya ilə birləşdirərək sizin üçün ən optimal həlləri tapırıq.",
+      desc: "Biz kərpic istehsalçıları ilə alıcılar arasında innovativ bir körpüyük. Ənənəvi tikinti sektorunu müasir texnologiya ilə birləşdirərək sizin üçün ən optimal həlləri tapırıq.",
       features: [
-        { 
-          text: "Zavod Müqayisəsi", 
-          sub: "Bir neçə zavodun təklifini real vaxtda analiz edirik.", 
-          icon: <Scale /> 
-        },
-        { 
-          text: "Sürətli Ünsiyyət", 
-          sub: "WhatsApp üzərindən anlıq və aydın dialoq qururuq.", 
-          icon: <MessageCircle /> 
-        },
-        { 
-          text: "Maksimum Qənaət", 
-          sub: "Həm büdcənizi, həm də ən qiymətli olan vaxtınızı qoruyuruq.", 
-          icon: <PiggyBank /> 
-        }
+        { title: "Zavod Müqayisəsi", desc: "Süni intellekt dəstəkli sistemimizlə zavod təkliflərini anlıq analiz edirik.", icon: <Scale /> },
+        { title: "Sürətli Ünsiyyət", desc: "WhatsApp üzərindən 7/24 kəsintisiz və aydın dialoq imkanı.", icon: <MessageCircle /> },
+        { title: "Maksimum Qənaət", desc: "Həm büdcənizi, həm də ən qiymətli olan vaxtınızı səmərəli qoruyuruq.", icon: <Wallet   /> }
       ]
     },
-    // en və ru hissələri də eyni strukturda əlavə edilə bilər...
+    en: {
+      tag: "Digital Bridge",
+      title: "Who are we?",
+      desc: "We are an innovative bridge between brick manufacturers and buyers. We combine the traditional construction sector with modern technology.",
+      features: [
+        { title: "Factory Comparison", desc: "We analyze factory offers instantly with our AI-backed system.", icon: <Scale /> },
+        { title: "Fast Communication", desc: "24/7 seamless and clear dialogue via WhatsApp.", icon: <MessageCircle /> },
+        { title: "Maximum Savings", desc: "We efficiently protect both your budget and your most valuable time.", icon: <Wallet   /> }
+      ]
+    },
+    ru: {
+      tag: "Цифровой мост",
+      title: "Кто мы?",
+      desc: "Мы — инновационный мост между производителями кирпича и покупателями. Мы объединяем традиционный строительный сектор с современными технологиями.",
+      features: [
+        { title: "Сравнение заводов", desc: "Мгновенно анализируем предложения заводов с помощью нашей системы.", icon: <Scale /> },
+        { title: "Быстрая связь", desc: "Круглосуточный бесперебойный диалог через WhatsApp.", icon: <MessageCircle /> },
+        { title: "Максимальная экономия", desc: "Мы эффективно защищаем ваш бюджет и ваше драгоценное время.", icon: <Wallet   /> }
+      ]
+    }
   };
 
   const current = content[lang as keyof typeof content] || content.az;
 
   return (
-    <section id="about" className="py-24 bg-white relative overflow-hidden">
-      {/* Dekorativ Element - Sağ tərəfdə yumşaq yaşıl parıltı */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-green-50 rounded-full blur-[120px] opacity-60 pointer-events-none"></div>
+    <section id="about" className="py-24 bg-slate-950 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
-          {/* Sol tərəf: Mətn və Başlıq */}
-          <div className="lg:w-1/2 text-left">
-            <span className="inline-block py-1 px-4 rounded-full bg-green-100 text-green-700 text-sm font-bold mb-4 uppercase tracking-widest">
-              {current.tag}
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-[1.1]">
-              {current.title}
-            </h2>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              {current.desc}
-            </p>
-            <button className="group flex items-center gap-2 text-green-600 font-bold hover:gap-4 transition-all duration-300">
-              {lang === "az" ? "Daha çox məlumat" : "Learn more"} <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Sağ tərəf: İnnovativ Kartlar */}
-          <div className="lg:w-1/2 grid grid-cols-1 gap-4">
-            {current.features.map((item, index) => (
-              <div 
-                key={index}
-                className="group flex items-start gap-6 p-6 rounded-2xl bg-white border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(34,197,94,0.12)] hover:border-green-200 transition-all duration-500"
-              >
-                <div className="flex-shrink-0 w-14 h-14 bg-slate-50 rounded-xl flex items-center justify-center text-slate-700 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
-                  {item.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">
-                    {item.text}
-                  </h3>
-                  <p className="text-slate-500 leading-relaxed text-sm">
-                    {item.sub}
-                  </p>
+          {/* Sol Tərəf: Vizual Element */}
+          <div className="lg:w-5/12 relative group">
+            <div className="absolute inset-0 bg-green-500/20 blur-[80px] rounded-full group-hover:bg-green-500/30 transition-all duration-700"></div>
+            <div className="relative z-10 border border-white/10 bg-slate-900/50 backdrop-blur-xl p-8 rounded-[3rem] shadow-2xl">
+              <div className="grid grid-cols-2 gap-4">
+                <img src="/brick-hero.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5" alt="Brick 1" />
+                <img src="/brick-hero_2.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 mt-8" alt="Brick 2" />
+                <img src="/brick-hero_3.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
+                <div className="bg-green-500 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4">
+                  <ShieldCheck className="w-10 h-10 mb-2" />
+                  <span className="text-sm font-bold leading-tight">100% Güvənli Təchizat</span>
                 </div>
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Sağ Tərəf: Mətn və Özəlliklər */}
+          <div className="lg:w-7/12">
+            <span className="inline-block py-1 px-4 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold mb-6 uppercase tracking-[0.2em]">
+              {current.tag}
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+              {current.title}
+            </h2>
+            <p className="text-xl text-slate-400 mb-12 leading-relaxed max-w-2xl">
+              {current.desc}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+              {current.features.map((item, index) => (
+                <div 
+                  key={index}
+                  className="group flex items-center gap-6 p-6 rounded-3xl bg-white/5 border border-white/5 hover:border-green-500/30 hover:bg-white/[0.08] transition-all duration-500"
+                >
+                  <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-all duration-300 shadow-xl">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-500 leading-relaxed text-sm">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
