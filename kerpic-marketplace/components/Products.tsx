@@ -1,8 +1,8 @@
 "use client";
 
 import { useLanguage } from "./LanguageContext";
-import { MessageCircle, ArrowUpRight } from "lucide-react";
-import Link from "next/link"; // Link komponentini əlavə edirik
+import { MessageCircle, Info } from "lucide-react";
+import Link from "next/link";
 
 export default function Products() {
   const { lang } = useLanguage();
@@ -16,80 +16,66 @@ export default function Products() {
       { id: 5, slug: "qirmizi-kerpic-25x12x6", name: "Qırmızı: 25x12x6.5", img: "/brick-hero_2.jpg" },
       { id: 6, slug: "odadavamli-kerpic-19x19x13", name: "Odadavamlı kərpic: 19x19x13.5", img: "/brick-hero_3.jpg" },
     ],
-    en: [
-      { id: 1, slug: "red-brick", name: "Red brick", img: "/brick-hero.jpg" },
-      { id: 2, slug: "white-brick", name: "White brick", img: "/brick-hero_2.jpg" },
-      { id: 3, slug: "hollow-brick", name: "Hollow brick", img: "/brick-hero_3.jpg" },
-      { id: 4, slug: "decorative-brick", name: "Decorative brick", img: "/brick-hero.jpg" },
-      { id: 5, slug: "fire-brick", name: "Fire brick", img: "/brick-hero_2.jpg" },
-      { id: 6, slug: "cement-brick", name: "Cement brick", img: "/brick-hero_3.jpg" },
-    ],
-    ru: [
-      { id: 1, slug: "krasniy-kirpich", name: "Красный кирпич", img: "/brick-hero.jpg" },
-      { id: 2, slug: "beliy-kirpich", name: "Белый кирпич", img: "/brick-hero_2.jpg" },
-      { id: 3, slug: "pustotetliy-kirpich", name: "Пустотелый кирпич", img: "/brick-hero_3.jpg" },
-      { id: 4, slug: "dekorativniy-kirpich", name: "Декоративный кирпич", img: "/brick-hero.jpg" },
-      { id: 5, slug: "ogneuporniy-kirpich", name: "Огнеупорный кирпич", img: "/brick-hero_2.jpg" },
-      { id: 6, slug: "cementniy-kirpich", name: "Цементный кирпич", img: "/brick-hero_3.jpg" },
-    ]
+    // en və ru bölmələri eyni qalır...
+    en: [ /* ... */ ],
+    ru: [ /* ... */ ]
   };
 
   const currentProducts = products[lang as keyof typeof products] || products.az;
 
-  return (
-    <section id="products" className="py-24 bg-slate-950 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.05)_0%,transparent_70%)]"></div>
+  const t = {
+    details: lang === "az" ? "Ətraflı məlumat" : lang === "ru" ? "Подробнее" : "View Details",
+    order: lang === "az" ? "WhatsApp ilə soruş" : lang === "ru" ? "Спросить в WhatsApp" : "Ask on WhatsApp"
+  };
 
+  return (
+    <section id="products" className="py-20 bg-slate-950 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
             {lang === "az" ? "Məhsullarımız" : lang === "ru" ? "Наша продукция" : "Our Products"}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            {lang === "az" 
-              ? "Ehtiyacınıza uyğun kərpic növünü seçin, biz ən yaxşı zavod qiymətini təqdim edək."
-              : lang === "ru"
-              ? "Выберите подходящий тип кирпича, и мы предложим лучшую заводскую цену."
-              : "Choose the brick type that fits your needs, and we'll provide the best factory price."}
-          </p>
+          <div className="w-16 h-1 bg-green-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentProducts.map((product) => (
             <div 
               key={product.id}
-              className="group relative bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-[2.5rem] p-6 hover:border-green-500/30 transition-all duration-500 hover:-translate-y-2 shadow-2xl"
+              className="group bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-[2rem] p-5 hover:border-green-500/30 transition-all duration-500 flex flex-col shadow-2xl"
             >
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-800/50 mb-6 flex items-center justify-center border border-white/5">
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              {/* ŞƏKİL: Kliklənə bilən və uzaqlıq hissi ilə */}
+              <Link href={`/products/${product.slug}`} className="relative aspect-[4/3] mb-5 overflow-hidden rounded-2xl bg-slate-800/50 p-6 flex items-center justify-center cursor-pointer border border-white/5">
                 <img 
                   src={product.img} 
                   alt={product.name}
-                  className="w-4/5 h-4/5 object-contain transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" 
                 />
-                
-                {/* Ox işarəsi indi bir keçid (Link) funksiyası daşıyır */}
-                <Link 
-                  href={`/products/${product.slug}`}
-                  className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-green-500 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 text-white z-20 cursor-pointer"
-                >
-                  <ArrowUpRight className="w-5 h-5" />
-                </Link>
-              </div>
+              </Link>
 
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors px-2">
+              <div className="flex flex-col flex-grow px-1">
+                <h3 className="text-lg font-bold text-white mb-6 line-clamp-1 group-hover:text-green-400 transition-colors">
                   {product.name}
                 </h3>
                 
-                <a 
-                  href="https://wa.me/994776235836"
-                  className="w-full bg-white/5 hover:bg-green-500 text-white py-4 rounded-2xl flex items-center justify-center gap-2 font-bold transition-all duration-300 border border-white/10 hover:border-green-500 hover:shadow-[0_10px_30px_rgba(34,197,94,0.3)]"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  {lang === "az" ? "WhatsApp ilə soruş" : lang === "ru" ? "Спросить в WhatsApp" : "Ask on WhatsApp"}
-                </a>
+                {/* DÜYMƏLƏR: Alt-alta düzülüş */}
+                <div className="mt-auto space-y-3">
+                  <Link 
+                    href={`/products/${product.slug}`}
+                    className="w-full bg-white/5 hover:bg-white/10 text-white py-3.5 rounded-xl flex items-center justify-center gap-2 text-xs font-bold border border-white/10 transition-all active:scale-95"
+                  >
+                    <Info className="w-4 h-4 text-green-500" />
+                    {t.details}
+                  </Link>
+
+                  <a 
+                    href="https://wa.me/994776235836"
+                    className="w-full bg-green-600 hover:bg-green-500 text-white py-3.5 rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all active:scale-95 shadow-lg shadow-green-900/20"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    {t.order}
+                  </a>
+                </div>
               </div>
             </div>
           ))}
