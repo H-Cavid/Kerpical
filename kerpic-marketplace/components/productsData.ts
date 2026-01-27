@@ -120,11 +120,11 @@ export const productsData = {
     {
       slug: "kerpic-saxta",
       name: "Şaxta Kərpici",
-      img: "/images/bricks/Shaxta/saxta_angle.jpg",
+      img: "/images/bricks/shaxta/saxta_angle.jpg",
       gallery: [
-        "/images/bricks/Shaxta/saxta_angle.jpg",
-        "/images/bricks/Shaxta/saxta_side.jpg",
-        "/images/bricks/Shaxta/saxta_top.jpg"
+        "/images/bricks/shaxta/saxta_angle.jpg",
+        "/images/bricks/shaxta/saxta_side.jpg",
+        "/images/bricks/shaxta/saxta_top.jpg"
       ],
       dims: { l: "Standart", w: "Standart", h: "Standart", model: "Shaxta" },
       desc: "Xüsusi daxili konstruksiyalar, havalandırma sistemləri və kommunikasiya şaxtaları üçün nəzərdə tutulmuş kərpic növüdür.",
