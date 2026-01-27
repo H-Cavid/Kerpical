@@ -54,9 +54,9 @@ export default function About() {
             <div className="absolute inset-0 bg-green-500/20 blur-[80px] rounded-full group-hover:bg-green-500/30 transition-all duration-700"></div>
             <div className="relative z-10 border border-white/10 bg-slate-900/50 backdrop-blur-xl p-8 rounded-[3rem] shadow-2xl">
               <div className="grid grid-cols-2 gap-4">
-                <img src="/brick-hero.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5" alt="Brick 1" />
-                <img src="/brick-hero_2.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 mt-8" alt="Brick 2" />
-                <img src="/brick-hero_3.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
+                <img src="/images/bricks/19x19x29/29_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5" alt="Brick 1" />
+                <img src="/images/bricks/19x19x39/39_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 mt-8" alt="Brick 2" />
+                <img src="/images/bricks/Shaxta/saxta_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
                 <div className="bg-green-500 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4">
                   <ShieldCheck className="w-10 h-10 mb-2" />
                   <span className="text-sm font-bold leading-tight">100% Güvənli Təchizat</span>

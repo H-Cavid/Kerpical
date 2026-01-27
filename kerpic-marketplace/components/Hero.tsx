@@ -69,9 +69,9 @@ const content = {
 } as const;
 
 const images = [
-  "/brick-hero.jpg",
-  "/brick-hero_2.jpg",
-  "/brick-hero_3.jpg",
+  "/images/bricks/19x19x29/29_angle.jpg",
+  "/images/bricks/19x19x8.5/8_5_angle.jpg",
+  "/images/bricks/19x19x13.5/13_5_angle.jpg",
 ];
 
 type LangKey = keyof typeof content;
