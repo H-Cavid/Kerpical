@@ -56,7 +56,7 @@ export default function About() {
               <div className="grid grid-cols-2 gap-4">
                 <img src="/images/bricks/19x19x29/29_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5" alt="Brick 1" />
                 <img src="/images/bricks/19x19x39/39_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 mt-8" alt="Brick 2" />
-                <img src="/images/bricks/Shaxta/saxta_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
+                <img src="/images/bricks/shaxta/saxta_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
                 <div className="bg-green-500 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4">
                   <ShieldCheck className="w-10 h-10 mb-2" />
                   <span className="text-sm font-bold leading-tight">100% Güvənli Təchizat</span>
