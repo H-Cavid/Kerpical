@@ -9,7 +9,6 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Səhifə aşağı sürüşdürüldükdə navbarın görünüşünü dəyişirik
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -18,28 +17,37 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Ən yuxarı qalxma funksiyası (Logo üçün)
-  const scrollToTop = (e: React.MouseEvent) => {
+  const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    if (window.scrollY === 0) {
+      window.location.reload();
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }
   };
 
+  // Naviqasiya linklərini bura əlavə edirik
   const navLinks = {
     az: [
       { name: "Məhsullar", href: "#products" },
+      { name: "Kalkulyator", href: "#calculator" },
       { name: "Necə işləyir?", href: "#how-it-works" },
       { name: "Biz kimik", href: "#about" },
       { name: "Əlaqə", href: "#contact" },
     ],
     en: [
       { name: "Products", href: "#products" },
+      { name: "Calculator", href: "#calculator" },
       { name: "How it works", href: "#how-it-works" },
       { name: "About us", href: "#about" },
       { name: "Contact", href: "#contact" },
     ],
     ru: [
       { name: "Продукция", href: "#products" },
+      { name: "Калькулятор", href: "#calculator" },
       { name: "Как это работает", href: "#how-it-works" },
       { name: "О нас", href: "#about" },
       { name: "Контакты", href: "#contact" },
@@ -58,10 +66,9 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         
-        {/* Logo - Kliklənəndə səhifənin başına qalxır */}
         <a 
           href="/" 
-          onClick={scrollToTop}
+          onClick={handleLogoClick}
           className="text-2xl font-black text-white tracking-tighter cursor-pointer group"
         >
           kerpical<span className="text-green-500 group-hover:text-green-400 transition-colors">.az</span>
@@ -132,21 +139,6 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-          </div>
-          <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-            <div className="flex gap-2">
-              {["az", "ru", "en"].map((l) => (
-                <button
-                  key={l}
-                  onClick={() => { setLang(l as any); setIsMobileMenuOpen(false); }}
-                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
-                    lang === l ? "bg-green-500 text-white" : "bg-white/5 text-slate-400"
-                  }`}
-                >
-                  {l.toUpperCase()}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       )}

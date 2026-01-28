@@ -4,6 +4,7 @@ import HowItWorks from "@/components/HowItWorks";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Calculator from "@/components/Calculator";
 
 export default function Home() {
   return (
@@ -21,6 +22,8 @@ export default function Home() {
       <section id="products" className="scroll-mt-20">
         <Products />
       </section>
+      {/* Proses və Texniki Məlumatlar */}
+      <Calculator />
       
       {/* Proses və Texniki Məlumatlar */}
       <HowItWorks />

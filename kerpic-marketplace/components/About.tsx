@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "./LanguageContext";
-import { Scale, MessageCircle, Wallet  , ArrowRight, ShieldCheck } from "lucide-react";
+import { Scale, MessageCircle, Wallet, ShieldCheck } from "lucide-react";
 
 export default function About() {
   const { lang } = useLanguage();
@@ -14,7 +14,7 @@ export default function About() {
       features: [
         { title: "Zavod Müqayisəsi", desc: "Süni intellekt dəstəkli sistemimizlə zavod təkliflərini anlıq analiz edirik.", icon: <Scale /> },
         { title: "Sürətli Ünsiyyət", desc: "WhatsApp üzərindən 7/24 kəsintisiz və aydın dialoq imkanı.", icon: <MessageCircle /> },
-        { title: "Maksimum Qənaət", desc: "Həm büdcənizi, həm də ən qiymətli olan vaxtınızı səmərəli qoruyuruq.", icon: <Wallet   /> }
+        { title: "Maksimum Qənaət", desc: "Həm büdcənizi, həm də ən qiymətli olan vaxtınızı səmərəli qoruyuruq.", icon: <Wallet /> }
       ]
     },
     en: {
@@ -24,7 +24,7 @@ export default function About() {
       features: [
         { title: "Factory Comparison", desc: "We analyze factory offers instantly with our AI-backed system.", icon: <Scale /> },
         { title: "Fast Communication", desc: "24/7 seamless and clear dialogue via WhatsApp.", icon: <MessageCircle /> },
-        { title: "Maximum Savings", desc: "We efficiently protect both your budget and your most valuable time.", icon: <Wallet   /> }
+        { title: "Maximum Savings", desc: "We efficiently protect both your budget and your most valuable time.", icon: <Wallet /> }
       ]
     },
     ru: {
@@ -34,7 +34,7 @@ export default function About() {
       features: [
         { title: "Сравнение заводов", desc: "Мгновенно анализируем предложения заводов с помощью нашей системы.", icon: <Scale /> },
         { title: "Быстрая связь", desc: "Круглосуточный бесперебойный диалог через WhatsApp.", icon: <MessageCircle /> },
-        { title: "Максимальная экономия", desc: "Мы эффективно защищаем ваш бюджет и ваше драгоценное время.", icon: <Wallet   /> }
+        { title: "Максимальная экономия", desc: "Мы эффективно защищаем ваш бюджет и ваше драгоценное время.", icon: <Wallet /> }
       ]
     }
   };
@@ -54,13 +54,47 @@ export default function About() {
             <div className="absolute inset-0 bg-green-500/20 blur-[80px] rounded-full group-hover:bg-green-500/30 transition-all duration-700"></div>
             <div className="relative z-10 border border-white/10 bg-slate-900/50 backdrop-blur-xl p-8 rounded-[3rem] shadow-2xl">
               <div className="grid grid-cols-2 gap-4">
-                <img src="/images/bricks/19x19x29/29_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5" alt="Brick 1" />
-                <img src="/images/bricks/19x19x39/39_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 mt-8" alt="Brick 2" />
-                <img src="/images/bricks/shaxta/saxta_angle.jpg" className="rounded-2xl w-full h-40 object-cover border border-white/5 -mt-8" alt="Brick 3" />
-                <div className="bg-green-500 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4">
-                  <ShieldCheck className="w-10 h-10 mb-2" />
-                  <span className="text-sm font-bold leading-tight">100% Güvənli Təchizat</span>
+                
+                {/* Şəkil 1 */}
+                <div className="relative rounded-2xl w-full h-40 overflow-hidden bg-white border border-white/5 shadow-inner group/img">
+                  <img src="/images/bricks/19x19x29/29_angle.jpg" className="w-full h-full object-contain p-2 z-10 relative group-hover/img:scale-110 transition-transform duration-500" alt="Brick 1" />
+                  <div className="absolute inset-0 z-20 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "url('/logo.png')", backgroundSize: '50px', backgroundRepeat: 'repeat' }}></div>
+                  {/* Mini Etiket */}
+                  <div className="absolute bottom-2 right-2 z-30 bg-slate-900/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 shadow-lg">
+                    <img src="/logo.png" className="h-2.5 w-auto" alt="logo" />
+                    <div className="w-[1px] h-2 bg-white/20"></div>
+                    <span className="text-[7px] font-black text-green-500 uppercase tracking-widest">Original</span>
+                  </div>
                 </div>
+
+                {/* Şəkil 2 */}
+                <div className="relative rounded-2xl w-full h-40 overflow-hidden bg-white border border-white/5 mt-8 shadow-inner group/img">
+                  <img src="/images/bricks/19x19x39/39_angle.jpg" className="w-full h-full object-contain p-2 z-10 relative group-hover/img:scale-110 transition-transform duration-500" alt="Brick 2" />
+                  <div className="absolute inset-0 z-20 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "url('/logo.png')", backgroundSize: '50px', backgroundRepeat: 'repeat' }}></div>
+                  <div className="absolute bottom-2 right-2 z-30 bg-slate-900/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 shadow-lg">
+                    <img src="/logo.png" className="h-2.5 w-auto" alt="logo" />
+                    <div className="w-[1px] h-2 bg-white/20"></div>
+                    <span className="text-[7px] font-black text-green-500 uppercase tracking-widest">Original</span>
+                  </div>
+                </div>
+
+                {/* Şəkil 3 */}
+                <div className="relative rounded-2xl w-full h-40 overflow-hidden bg-white border border-white/5 -mt-8 shadow-inner group/img">
+                  <img src="/images/bricks/shaxta/saxta_angle.jpg" className="w-full h-full object-contain p-2 z-10 relative group-hover/img:scale-110 transition-transform duration-500" alt="Brick 3" />
+                  <div className="absolute inset-0 z-20 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "url('/logo.png')", backgroundSize: '50px', backgroundRepeat: 'repeat' }}></div>
+                  <div className="absolute bottom-2 right-2 z-30 bg-slate-900/90 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 shadow-lg">
+                    <img src="/logo.png" className="h-2.5 w-auto" alt="logo" />
+                    <div className="w-[1px] h-2 bg-white/20"></div>
+                    <span className="text-[7px] font-black text-green-500 uppercase tracking-widest">Original</span>
+                  </div>
+                </div>
+
+                {/* Güvən Qutusu */}
+                <div className="bg-green-600 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4 shadow-lg shadow-green-900/20 border-b-4 border-green-700">
+                  <ShieldCheck className="w-10 h-10 mb-2" />
+                  <span className="text-sm font-black leading-tight uppercase tracking-tighter">100% Güvənli<br/>Təchizat</span>
+                </div>
+
               </div>
             </div>
           </div>
@@ -77,14 +111,16 @@ export default function About() {
               {current.desc}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               {current.features.map((item, index) => (
                 <div 
                   key={index}
                   className="group flex items-center gap-6 p-6 rounded-3xl bg-white/5 border border-white/5 hover:border-green-500/30 hover:bg-white/[0.08] transition-all duration-500"
                 >
                   <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-all duration-300 shadow-xl">
-                    {item.icon}
+                    <div className="w-8 h-8">
+                      {item.icon}
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white mb-1 group-hover:text-green-400 transition-colors">

@@ -4,24 +4,24 @@ import { use } from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { MessageCircle, ArrowLeft, CheckCircle2, Zap, Layers, ChevronDown } from "lucide-react";
-// Sənin hazırladığın əsas data faylı
 import { productsData } from "@/components/productsData"; 
 
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const slug = resolvedParams.slug;
   
-  // Datadan həmin slug-a uyğun məhsulu tapırıq
   const product = productsData.az.find((p) => p.slug === slug);
   
   const [activeImg, setActiveImg] = useState("");
 
-  // Məhsul dəyişəndə və ya ilk dəfə açılanda əsas şəkli təyin et
   useEffect(() => {
-    if (product) setActiveImg(product.img);
+    if (product && product.gallery && product.gallery.length > 0) {
+      setActiveImg(product.gallery[0]);
+    } else if (product) {
+      setActiveImg(product.img);
+    }
   }, [product]);
 
-  // Əgər məhsul tapılmasa (məsələn slug səhv yazılsa)
   if (!product) {
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-white p-4">
@@ -37,36 +37,70 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     <div className="min-h-screen bg-slate-950 text-white pt-20 pb-20 px-4 md:px-6 relative z-10">
       <div className="container mx-auto max-w-6xl">
         
-        {/* GERİ QAYIT */}
         <Link href="/#products" className="inline-flex items-center gap-2 text-slate-400 hover:text-green-500 mb-6 transition-all group text-sm font-bold uppercase italic">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> 
           Geri qayıt
         </Link>
 
-        {/* ÜST HİSSƏ: ŞƏKİL VƏ ƏSAS MƏLUMATLAR */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-10">
           
           <div className="flex flex-col gap-4">
-            {/* Əsas Şəkil Qutusu */}
-            <div className="aspect-square bg-slate-900/60 rounded-[2rem] flex items-center justify-center border border-white/5 overflow-hidden shadow-2xl max-h-[400px] md:max-h-[450px]">
-               <img 
-                 src={activeImg || product.img} 
-                 alt={product.name} 
-                 className="w-full h-full object-contain p-4 transition-all duration-700 hover:scale-105" 
-               />
+            {/* Şəkil Qutusu - Yenilənmiş Böyük Loqo və Etiket */}
+            <div className="relative aspect-square bg-white rounded-[2rem] flex items-center justify-center overflow-hidden shadow-2xl max-h-[400px] md:max-h-[450px] group/main border-4 border-slate-900/50">
+                
+                {/* Məhsul Şəkli */}
+                <img 
+                  src={activeImg || product.img} 
+                  alt={product.name} 
+                  className="w-full h-full object-contain p-8 transition-all duration-700 group-hover/main:scale-105 z-10 relative" 
+                />
+                
+                {/* 1. Watermark Pattern */}
+                <div 
+                   className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.05] rotate-[-15deg] scale-125"
+                   style={{
+                     backgroundImage: `url('/logo.png')`,
+                     backgroundSize: '100px',
+                     backgroundRepeat: 'repeat'
+                   }}
+                ></div>
+
+                {/* 2. Yenilənmiş Böyük və Müasir Etiket */}
+                <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-30 pointer-events-none select-none">
+                  <div className="bg-slate-900/90 backdrop-blur-2xl px-5 py-3 rounded-2xl border border-white/20 flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover/main:scale-110 group-hover/main:-translate-y-2">
+                      <img 
+                        src="/logo.png" 
+                        alt="kerpical.az" 
+                        className="h-7 md:h-8 w-auto object-contain" // Loqo ölçüsü böyüdüldü
+                      />
+                      <div className="w-[1px] h-6 bg-white/20"></div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-black tracking-[0.3em] text-green-500 uppercase leading-none mb-1">Original</span>
+                        <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none">Product</span>
+                      </div>
+                  </div>
+                </div>
             </div>
 
-            {/* Qalereya Düymələri */}
+            {/* Qalereya */}
             <div className="flex justify-center gap-3 flex-wrap">
-              {(product.gallery || [product.img]).map((img, index) => (
+              {(product.gallery && product.gallery.length > 0 ? product.gallery : [product.img]).map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveImg(img)}
-                  className={`w-16 h-16 rounded-xl border-2 transition-all overflow-hidden bg-slate-800/40 p-1 ${
+                  className={`w-16 h-16 rounded-xl border-2 transition-all overflow-hidden bg-white p-1 relative ${
                     activeImg === img ? "border-green-500 scale-105 shadow-lg" : "border-transparent opacity-50 hover:opacity-100"
                   }`}
                 >
-                  <img src={img} alt="thumbnail" className="w-full h-full object-contain rounded-lg" />
+                  <img src={img} alt="thumbnail" className="w-full h-full object-contain rounded-lg z-10 relative" />
+                  <div 
+                    className="absolute inset-0 z-20 opacity-[0.03] pointer-events-none"
+                    style={{
+                      backgroundImage: `url('/logo.png')`,
+                      backgroundSize: '20px',
+                      backgroundRepeat: 'repeat'
+                    }}
+                  ></div>
                 </button>
               ))}
             </div>
@@ -84,7 +118,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               {product.desc}
             </p>
 
-            {/* Ölçü Kartları (Dinamik) */}
             <div className="grid grid-cols-4 gap-2">
                 {[
                   { label: "Uzunluq", val: product.dims.l },
@@ -108,18 +141,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 WhatsApp ilə sifariş et
               </a>
             </div>
-
             <div className="flex items-center justify-center gap-2 text-slate-500 animate-bounce pt-4 text-sm font-bold">
               <span>Ətraflı məlumat üçün aşağı</span>
               <ChevronDown className="w-4 h-4" />
             </div>
           </div>
         </div>
-
-        {/* ALT HİSSƏ: ÖZƏLLİKLƏR VƏ SAHƏLƏR */}
+        
+        {/* Alt hissə (Özəlliklər və Sahələr) eyni qalır */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-white/5">
-          
-          {/* Niyə bu ölçü? (Dinamik Features) */}
           <div className="space-y-6">
             <h3 className="text-xl font-black flex items-center gap-3 text-white uppercase tracking-wider italic">
               <Zap className="text-green-500 w-5 h-5 fill-green-500" /> Niyə bu ölçü?
@@ -137,7 +167,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             </div>
           </div>
 
-          {/* İstifadə Sahələri (Dinamik Areas) */}
           <div className="space-y-6">
             <h3 className="text-xl font-black flex items-center gap-3 text-white uppercase tracking-wider italic">
               <Layers className="text-green-500 w-5 h-5" /> İstifadə Sahələri
@@ -153,7 +182,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </div>

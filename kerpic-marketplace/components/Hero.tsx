@@ -153,22 +153,48 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Sağ Tərəf: Vizual Həll (Problemi aradan qaldıran hissə) */}
+          {/* Sağ Tərəf: Vizual Həll + Loqo Qoruması */}
           <div className="relative flex justify-center items-center lg:justify-end">
-            {/* Arxa fon parıltısı */}
             <div className={`absolute w-[80%] h-[80%] bg-green-500/20 rounded-full blur-[120px] transition-opacity duration-1000 ${isFading ? "opacity-0" : "opacity-100"}`}></div>
             
-            {/* Şəkil Çərçivəsi: Şəklin kəsilmiş görünməməsi üçün p-8 (padding) əlavə edildi */}
-            <div className={`relative z-10 w-full max-w-[540px] aspect-square rounded-[40px] bg-white p-8 lg:p-12 shadow-2xl transition-all duration-700 ${isFading ? "scale-90 opacity-0 rotate-2" : "scale-100 opacity-100 rotate-0"}`}>
+            <div className={`relative z-10 w-full max-w-[540px] aspect-square rounded-[40px] bg-white p-8 lg:p-12 shadow-2xl transition-all duration-700 overflow-hidden ${isFading ? "scale-90 opacity-0 rotate-2" : "scale-100 opacity-100 rotate-0"}`}>
+              
+              {/* Əsas Şəkil */}
               <img 
                 src={images[index]} 
                 alt="Bricks" 
-                className="w-full h-full object-contain transition-transform duration-[2000ms]" 
+                className="w-full h-full object-contain transition-transform duration-[2000ms] relative z-10" 
               />
+
+              {/* Balanslaşdırılmış Pattern Watermark */}
+              <div 
+                className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.065] rotate-[-15deg] scale-125"
+                style={{
+                  backgroundImage: `url('/logo.png')`,
+                  backgroundSize: '120px',
+                  backgroundRepeat: 'repeat'
+                }}
+              ></div>
               
-              {/* Şəkil üzərində texnoloji detal (opsional) */}
-              <div className="absolute bottom-6 right-6 bg-slate-900/90 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl text-[10px] font-bold text-green-400 uppercase tracking-widest shadow-xl">
-                Premium Quality
+              {/* 2 DƏFƏ BÖYÜDÜLMÜŞ PROFESSIONAL KÜNC LOQOSU */}
+              <div className="absolute bottom-6 right-6 z-30 pointer-events-none select-none">
+                <div className="bg-slate-900/95 backdrop-blur-xl px-6 py-4 rounded-2xl border border-white/20 flex items-center gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-110">
+                  {/* Loqo h-4-dən h-8-ə qaldırıldı */}
+                  <img src="/logo.png" alt="logo" className="h-8 md:h-9 w-auto object-contain" />
+                  
+                  {/* Divider h-3-dən h-6-ya qaldırıldı */}
+                  <div className="w-[1px] h-6 bg-white/20"></div>
+                  
+                  {/* Mətn text-[10px]-dən text-sm-ə qaldırıldı */}
+                  <div className="flex flex-col">
+                    <span className="text-xs md:text-sm font-black text-green-500 uppercase tracking-[0.3em] leading-none mb-1">
+                     Premium
+                    </span>
+                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                      Original
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 

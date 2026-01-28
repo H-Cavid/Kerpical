@@ -19,33 +19,58 @@ export default function Products() {
               key={product.slug} 
               className="bg-slate-900/50 border border-white/5 rounded-[2rem] p-6 hover:border-green-500/50 transition-all group flex flex-col"
             >
-              <div className="aspect-square mb-6 overflow-hidden rounded-2xl bg-slate-950">
+              <div className="relative aspect-square mb-6 overflow-hidden rounded-2xl bg-white flex items-center justify-center group/card border border-white/5 shadow-inner">
+                
+                {/* 1. Əsas Məhsul Şəkli */}
                 <img 
                   src={product.img} 
                   alt={product.name} 
-                  className="w-full h-full object-contain p-6 group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-contain p-4 z-10 relative transition-transform duration-500 group-hover/card:scale-105" 
                 />
+
+                {/* 2. Balanslaşdırılmış Watermark (Pattern) */}
+                <div 
+                  className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.05] rotate-[-15deg] scale-125 transition-opacity"
+                  style={{
+                    backgroundImage: `url('/logo.png')`,
+                    backgroundSize: '90px',
+                    backgroundRepeat: 'repeat'
+                  }}
+                ></div>
+
+                {/* 3. Yenilənmiş Müasir Brend Etiketi */}
+                <div className="absolute bottom-3 right-3 z-30 pointer-events-none select-none">
+                   <div className="bg-slate-900/90 backdrop-blur-md px-4 py-5 rounded-xl border border-white/10 flex items-center gap-2 shadow-xl transition-all duration-300 group-hover/card:scale-110 group-hover/card:-translate-y-1">
+                      <img 
+                        src="/logo.png" 
+                        alt="logo" 
+                        className="h-4 w-auto object-contain" 
+                      />
+                      <div className="w-[1px] h-3 bg-white/20"></div>
+                      <span className="text-[8px] font-black text-green-500 uppercase tracking-[0.2em]">
+                        Original
+                      </span>
+                   </div>
+                </div>
               </div>
               
               <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
               <p className="text-slate-400 text-sm mb-6 line-clamp-2 flex-grow">{product.desc}</p>
               
               <div className="space-y-3">
-                {/* Ətraflı Məlumat Düyməsi */}
                 <Link 
                   href={`/products/${product.slug}`}
                   className="flex items-center justify-center gap-2 w-full bg-slate-800/40 hover:bg-slate-700/60 text-white py-3 rounded-xl font-semibold transition-all border border-white/5"
                 >
-                  <Info className="w-4 h-4 text-green-500" />
+                  <Info className="w-4 h-10 text-green-500" />
                   Ətraflı məlumat
                 </Link>
 
-                {/* WhatsApp Düyməsi */}
                 <a 
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(product.name + " haqqında məlumat almaq istəyirəm.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-[#00a859] hover:bg-[#008f4c] text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-green-900/20"
+                  className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-green-900/20 border-b-4 border-green-700 hover:border-green-600"
                 >
                   <MessageCircle className="w-5 h-5" />
                   WhatsApp ilə soruş

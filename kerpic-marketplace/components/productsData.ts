@@ -2,7 +2,7 @@ export const productsData = {
   az: [
     {
       slug: "kerpic-19-19-8-5",
-      name: "Kərpic: 19x19x8.5",
+      name: "KƏRPİC: 8.5x19x19",
       img: "/images/bricks/19x19x8.5/8_5_angle.jpg",
       gallery: [
         "/images/bricks/19x19x8.5/8_5_angle.jpg",
@@ -25,7 +25,7 @@ export const productsData = {
     },
     {
       slug: "kerpic-19-19-10-5",
-      name: "Kərpic: 19x19x10.5",
+      name: "KƏRPİC: 10.5x19x19",
       img: "/images/bricks/19x19x10.5/10_5_angle.jpg",
       gallery: [
         "/images/bricks/19x19x10.5/10_5_angle.jpg",
@@ -48,7 +48,7 @@ export const productsData = {
     },
     {
       slug: "kerpic-19-19-13-5",
-      name: "Kərpic: 19x19x13.5",
+      name: "KƏRPİC: 13.5x19x19",
       img: "/images/bricks/19x19x13.5/13_5_angle.jpg",
       gallery: [
         "/images/bricks/19x19x13.5/13_5_angle.jpg",
@@ -72,7 +72,7 @@ export const productsData = {
     },
     {
       slug: "kerpic-29-19-19",
-      name: "Qırmızı kərpic: 29x19x19",
+      name: "QIRMIZI KƏRPİC: 19x19x29",
       img: "/images/bricks/19x19x29/29_angle.jpg",
       gallery: [
         "/images/bricks/19x19x29/29_dimensions.jpg",
@@ -96,7 +96,7 @@ export const productsData = {
     },
     {
       slug: "kerpic-39-19-19",
-      name: "Qırmızı kərpic: 39x19x19",
+      name: "QIRMIZI KƏRPİC: 19x19x39",
       img: "/images/bricks/19x19x39/39_angle.jpg",
       gallery: [
         "/images/bricks/19x19x39/39_dimensions.jpg",
@@ -119,7 +119,7 @@ export const productsData = {
     },
     {
       slug: "kerpic-saxta",
-      name: "Şaxta Kərpici",
+      name: "ŞAXTA KƏRPİCİ",
       img: "/images/bricks/shaxta/saxta_angle.jpg",
       gallery: [
         "/images/bricks/shaxta/saxta_angle.jpg",
@@ -130,7 +130,7 @@ export const productsData = {
       desc: "Xüsusi daxili konstruksiyalar, havalandırma sistemləri və kommunikasiya şaxtaları üçün nəzərdə tutulmuş kərpic növüdür.",
       features: [
         { t: "Havalandırma", d: "Dairəvi boşluqlar hava axınını və boru keçidlərini asanlaşdırır." },
-        { t: "Yüksək İzolyasiya", d: "Səs və istiliyin şaxtalar vasitəsilə yayılmasının qarşısını alır." },
+        { t: "Yüksək İzolyasiya", d: "Səs və istiliyinin şaxtalar vasitəsilə yayılmasının qarşısını alır." },
         { t: "Davamlılıq", d: "Nəmə və rütubətə qarşı yüksək müqavimət nümayiş etdirir." }
       ],
       areas: [
