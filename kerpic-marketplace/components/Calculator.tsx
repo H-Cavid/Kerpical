@@ -1,30 +1,74 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLanguage } from "./LanguageContext";
 import { MessageCircle, RotateCcw, ChevronDown, Hash, Layers, Ruler, GanttChartSquare } from "lucide-react";
 
 interface BrickType {
-  name: string;
-  sizeLabel: string; // Mesaj üçün təmiz ölçü etiketi
+  name: Record<string, string>;
+  sizeLabel: string;
   perSquare?: number;
   modes?: { uzununa: number; enine: number };
   multiMode: boolean;
 }
 
 const BRICK_DATA: Record<string, BrickType> = {
-  "8": { name: "8-lik Standart", sizeLabel: "19 × 19 × 8.5 sm", perSquare: 27, multiMode: false },
-  "10": { name: "10-luq Standart", sizeLabel: "10 × 19 × 19 sm", perSquare: 27, multiMode: false },
-  "13": { name: "13-lük Standart", sizeLabel: "19 × 19 × 13.5 sm", perSquare: 27, multiMode: false },
-  "29": { name: "29-luq İzolyasiyalı", sizeLabel: "29 × 19 × 19 sm", modes: { uzununa: 18, enine: 22 }, multiMode: true },
-  "39": { name: "39-luq İzolyasiyalı", sizeLabel: "39 × 19 × 19 sm", modes: { uzununa: 14, enine: 18 }, multiMode: true },
+  "8": { 
+    name: { az: "8-lik Standart", en: "Standard 8-brick", ru: "Стандартная 8-ка" }, 
+    sizeLabel: "19 × 19 × 8.5 sm", perSquare: 27, multiMode: false 
+  },
+  "10": { 
+    name: { az: "10-luq Standart", en: "Standard 10-brick", ru: "Стандартная 10-ка" }, 
+    sizeLabel: "10 × 19 × 19 sm", perSquare: 27, multiMode: false 
+  },
+  "13": { 
+    name: { az: "13-lük Standart", en: "Standard 13-brick", ru: "Стандартная 13-ка" }, 
+    sizeLabel: "19 × 19 × 13.5 sm", perSquare: 27, multiMode: false 
+  },
+  "29": { 
+    name: { az: "29-luq İzolyasiyalı", en: "29-cm Insulated", ru: "29-ка Изоляционный" }, 
+    sizeLabel: "29 × 19 × 19 sm", modes: { uzununa: 18, enine: 22 }, multiMode: true 
+  },
+  "39": { 
+    name: { az: "39-luq İzolyasiyalı", en: "39-cm Insulated", ru: "39-ка Изоляционный" }, 
+    sizeLabel: "39 × 19 × 19 sm", modes: { uzununa: 14, enine: 18 }, multiMode: true 
+  },
 };
 
 export default function Calculator() {
+  const { lang } = useLanguage();
   const [area, setArea] = useState<string>("");
   const [type, setType] = useState<string>("8");
   const [mode, setMode] = useState<"uzununa" | "enine">("uzununa");
   const [wallType, setWallType] = useState<"single" | "double">("single");
   const [result, setResult] = useState(0);
+
+  const t = {
+    title: { az: "Kərpic", en: "Brick", ru: "Кирпичный" },
+    subtitle: { az: "Kalkulyatoru", en: "Calculator", ru: "Калькулятор" },
+    badge: { az: "Dəqiq Hesablama Sistemi", en: "Precise Calculation System", ru: "Система точного расчета" },
+    labelArea: { az: "Hörüləcək divarın sahəsi (m²)", en: "Wall area to be built (m²)", ru: "Площадь возводимой стены (м²)" },
+    labelBrick: { az: "KƏRPİC SEÇİMİ (MODEL)", en: "BRICK SELECTION (MODEL)", ru: "ВЫБОР КИРПИЧА (МОДЕЛЬ)" },
+    labelMode: { az: "HÖRGÜ NÖVÜ", en: "MASONRY TYPE", ru: "ТИП КЛАДКИ" },
+    mode1: { az: "Uzununa", en: "Lengthwise", ru: "Продольная" },
+    mode2: { az: "Eninə", en: "Widthwise", ru: "Поперечная" },
+    labelThickness: { az: "DİVAR QALINLIĞI", en: "WALL THICKNESS", ru: "ТОЛЩИНА СТЕНЫ" },
+    single: { az: "Tək Qat", en: "Single Layer", ru: "Одинарная" },
+    double: { az: "Qoşa Qat", en: "Double Layer", ru: "Двойная" },
+    resultLabel: { az: "TƏXMİNİ TƏLƏB OLUNAN MİQDAR", en: "ESTIMATED QUANTITY REQUIRED", ru: "ПРИМЕРНОЕ ТРЕБУЕМОЕ КОЛИЧЕСТВО" },
+    unit: { az: "Ə D Ə D", en: "P C S", ru: "Ш Т" },
+    footerNote: { 
+      az: "* Hesablama çoxillik usta təcrübəsi və real tikinti normaları əsasında hazırlanmışdır.", 
+      en: "* Calculation is based on years of master experience and real construction standards.", 
+      ru: "* Расчет основан на многолетнем опыте мастеров и реальных строительных нормах." 
+    },
+    button: { az: "SİFARİŞİ TƏSDİQLƏ", en: "CONFIRM ORDER", ru: "ПОДТВЕРДИТЬ ЗАКАЗ" },
+    whatsapp: {
+      az: (a: any, s: any, w: any, r: any) => `Salam, kerpical.az. Layihəm üçün ${a || 0} m² sahəyə ${s} kərpicindən (${w}) cəmi ${r} ədəd hesabladım. Qiymət təklifi ala bilərəm?`,
+      en: (a: any, s: any, w: any, r: any) => `Hello, kerpical.az. I calculated a total of ${r} pieces of ${s} bricks (${w}) for a ${a || 0} m² area. Can I get a price quote?`,
+      ru: (a: any, s: any, w: any, r: any) => `Здравствуйте, kerpical.az. Я рассчитал в общей сложности ${r} штук кирпича ${s} (${w}) на площадь ${a || 0} м². Могу ли я получить ценовое предложение?`
+    }
+  };
 
   const handleReset = () => {
     setArea("");
@@ -48,9 +92,8 @@ export default function Calculator() {
     setResult(Math.ceil(count));
   }, [area, type, mode, wallType]);
 
-  // Dinamik WhatsApp Mesajı
-  const wallLabel = wallType === "single" ? "tək qat" : "qoşa qat";
-  const whatsappMessage = `Salam, kerpical.az. Layihəm üçün ${area || 0} m² sahəyə ${BRICK_DATA[type].sizeLabel} kərpicindən (${wallLabel}) cəmi ${result} ədəd hesabladım. Qiymət təklifi ala bilərəm?`;
+  const wallLabel = wallType === "single" ? (lang === "az" ? "tək qat" : lang === "ru" ? "одинарный" : "single layer") : (lang === "az" ? "qoşa qat" : lang === "ru" ? "двойной" : "double layer");
+  const whatsappMessage = t.whatsapp[lang as keyof typeof t.whatsapp](area, BRICK_DATA[type].sizeLabel, wallLabel, result);
 
   return (
     <section id="calculator" className="py-12 bg-[#020617] text-white scroll-mt-24">
@@ -59,10 +102,10 @@ export default function Calculator() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full mb-4">
             <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">Dəqiq Hesablama Sistemi</span>
+            <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">{t.badge[lang as keyof typeof t.badge]}</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase leading-none">
-            MÜHƏNDİS <span className="text-green-500">HESABATI</span>
+            {t.title[lang as keyof typeof t.title]} <span className="text-green-500">{t.subtitle[lang as keyof typeof t.subtitle]}</span>
           </h2>
         </div>
 
@@ -77,12 +120,12 @@ export default function Calculator() {
             <div className="lg:col-span-7 space-y-6 py-2">
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">
-                  <Hash className="w-3 h-3 text-green-500" /> LAYİHƏNİN ÜMUMİ SAHƏSİ (m²)
+                  <Hash className="w-3 h-3 text-green-500" /> {t.labelArea[lang as keyof typeof t.labelArea]}
                 </label>
                 <input
                   type="number"
                   value={area}
-                  placeholder="Məsələn: 100"
+                  placeholder={lang === "az" ? "Məsələn: 10.5" : lang === "ru" ? "Например: 10.5" : "E.g.: 10.5"}
                   onChange={(e) => setArea(e.target.value)}
                   className="w-full bg-[#161F33] border border-white/5 rounded-xl py-4 px-5 focus:border-green-500 outline-none transition-all font-bold text-lg"
                 />
@@ -90,7 +133,7 @@ export default function Calculator() {
 
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">
-                  <Layers className="w-3 h-3 text-green-500" /> KƏRPİC SEÇİMİ (MODEL)
+                  <Layers className="w-3 h-3 text-green-500" /> {t.labelBrick[lang as keyof typeof t.labelBrick]}
                 </label>
                 <div className="relative">
                   <select
@@ -99,7 +142,7 @@ export default function Calculator() {
                     className="w-full bg-[#161F33] border border-white/5 rounded-xl py-4 px-5 font-bold text-sm outline-none cursor-pointer appearance-none"
                   >
                     {Object.entries(BRICK_DATA).map(([key, val]) => (
-                      <option key={key} value={key} className="bg-[#0B1224]">{val.name} ({val.sizeLabel})</option>
+                      <option key={key} value={key} className="bg-[#0B1224]">{val.name[lang as keyof typeof val.name]} ({val.sizeLabel})</option>
                     ))}
                   </select>
                   <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 pointer-events-none" />
@@ -109,42 +152,42 @@ export default function Calculator() {
               {BRICK_DATA[type].multiMode && (
                 <div className="space-y-2 animate-in fade-in slide-in-from-top-1 duration-200">
                   <label className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">
-                    <GanttChartSquare className="w-3 h-3 text-green-500" /> HÖRGÜ KONFİQURASİYASI
+                    <GanttChartSquare className="w-3 h-3 text-green-500" /> {t.labelMode[lang as keyof typeof t.labelMode]}
                   </label>
                   <div className="grid grid-cols-2 gap-2 p-1 bg-[#161F33] rounded-xl border border-white/5">
-                    <button onClick={() => setMode("uzununa")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${mode === "uzununa" ? "bg-slate-700 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>Uzununa</button>
-                    <button onClick={() => setMode("enine")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${mode === "enine" ? "bg-slate-700 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>Eninə</button>
+                    <button onClick={() => setMode("uzununa")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${mode === "uzununa" ? "bg-slate-700 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>{t.mode1[lang as keyof typeof t.mode1]}</button>
+                    <button onClick={() => setMode("enine")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${mode === "enine" ? "bg-slate-700 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>{t.mode2[lang as keyof typeof t.mode2]}</button>
                   </div>
                 </div>
               )}
 
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">
-                  <Ruler className="w-3 h-3 text-green-500" /> KONSTRUKTİV QALINLIQ
+                  <Ruler className="w-3 h-3 text-green-500" /> {t.labelThickness[lang as keyof typeof t.labelThickness]}
                 </label>
                 <div className="grid grid-cols-2 gap-2 p-1 bg-[#161F33] rounded-xl border border-white/5">
-                  <button onClick={() => setWallType("single")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${wallType === "single" ? "bg-green-600 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>Tək Qat</button>
-                  <button onClick={() => setWallType("double")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${wallType === "double" ? "bg-green-600 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>Qoşa Qat</button>
+                  <button onClick={() => setWallType("single")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${wallType === "single" ? "bg-green-600 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>{t.single[lang as keyof typeof t.single]}</button>
+                  <button onClick={() => setWallType("double")} className={`py-3 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${wallType === "double" ? "bg-green-600 text-white shadow-md" : "text-slate-500 hover:text-white"}`}>{t.double[lang as keyof typeof t.double]}</button>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-5 bg-[#0B1224] rounded-[2rem] p-6 border border-white/5 flex flex-col items-center justify-between text-center min-h-[350px]">
               <div className="w-full">
-                <span className="text-slate-500 text-[9px] font-bold uppercase tracking-[0.4em] mb-2 block">TƏXMİNİ TƏLƏB OLUNAN MİQDAR</span>
+                <span className="text-slate-500 text-[9px] font-bold uppercase tracking-[0.4em] mb-2 block">{t.resultLabel[lang as keyof typeof t.resultLabel]}</span>
                 <div className="relative inline-block mt-2">
                   <span className="text-[6.5rem] md:text-[8rem] font-black italic tracking-tighter leading-none text-white block drop-shadow-2xl">
                     {result}
                   </span>
                   <div className="flex justify-center -mt-1">
-                    <span className="text-green-500 text-lg font-black uppercase tracking-[0.6em] bg-[#0B1224] px-3 italic">Ə D Ə D</span>
+                    <span className="text-green-500 text-lg font-black uppercase tracking-[0.6em] bg-[#0B1224] px-3 italic">{t.unit[lang as keyof typeof t.unit]}</span>
                   </div>
                 </div>
               </div>
 
               <div className="w-full space-y-5">
                 <p className="text-[8px] text-slate-600 uppercase font-bold leading-relaxed border-t border-white/5 pt-4 italic">
-                  * HESABLAMA GOST STANDARTLARI VƏ PEŞƏKAR USTA İTKİLƏRİ ƏSASINDA APARILMIŞDIR.
+                  {t.footerNote[lang as keyof typeof t.footerNote]}
                 </p>
                 <a
                   href={`https://wa.me/994776235836?text=${encodeURIComponent(whatsappMessage)}`}
@@ -152,7 +195,7 @@ export default function Calculator() {
                   className="w-full bg-green-600 hover:bg-green-500 py-4 rounded-xl flex items-center justify-center gap-2 font-black text-base transition-all shadow-lg shadow-green-600/20 active:scale-95"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  SİFARİŞİ TƏSDİQLƏ
+                  {t.button[lang as keyof typeof t.button]}
                 </a>
               </div>
             </div>

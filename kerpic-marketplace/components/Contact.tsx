@@ -8,28 +8,31 @@ export default function Contact() {
 
   const content = {
     az: {
-      title: "Layihənizi bizimlə başladın",
-      subtitle: "Kərpic sifarişi və qiymət təklifi üçün birbaşa mütəxəssislərimizə yazın.",
+      title: "Tikintinizi Bizimlə Tamamlayın.",
+      subtitle: "Vaxt itirmədən ən doğru kərpic seçimini edin. Sifariş və pulsuz qiymət təklifi üçün birbaşa mütəxəssisimizlə əlaqə saxlayın.",
       button: "WhatsApp-da yazın",
       hours: "İş saatları: 09:00 – 18:00",
       days: "Bazar ertəsi – Şənbə",
-      location: "Bakı, Azərbaycan"
+      location: "Ölkədaxili Çatdırılma",
+      deliveryDesc: "Bakı, Abşeron və bütün rayonlara operativ çatdırılma."
     },
     en: {
-      title: "Start your project with us",
-      subtitle: "Contact our specialists directly for brick orders and price quotes.",
+      title: "Complete Your Construction With Us.",
+      subtitle: "Make the right brick choice without wasting time. Contact our specialist directly for orders and a free price quote.",
       button: "Write on WhatsApp",
       hours: "Working hours: 09:00 – 18:00",
       days: "Monday – Saturday",
-      location: "Baku, Azerbaijan"
+      location: "Nationwide Delivery",
+      deliveryDesc: "Operative supply to Baku, Absheron, and all regions."
     },
     ru: {
-      title: "Начните свой проект с нами",
-      subtitle: "Свяжитесь с нашими специалистами напрямую для заказа кирпича и получения ценового предложения.",
+      title: "Завершите строительство с нами.",
+      subtitle: "Сделайте правильный выбор кирпича, не теряя времени. Свяжитесь с нашим специалистом для заказа и бесплатного ценового предложения.",
       button: "Написать в WhatsApp",
       hours: "Рабочие часы: 09:00 – 18:00",
       days: "Понедельник – Суббота",
-      location: "Баку, Азербайджан"
+      location: "Доставка по всей стране",
+      deliveryDesc: "Оперативная поставка в Баку, Абшерон и во все регионы."
     }
   };
 
@@ -84,7 +87,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-white font-bold mb-1">{current.location}</p>
-                  <p className="text-slate-500 text-sm">{lang === "az" ? "Hər yerə çatdırılma" : "Delivery everywhere"}</p>
+                  <p className="text-slate-500 text-sm">{current.deliveryDesc}</p>
                 </div>
               </div>
 
@@ -92,7 +95,6 @@ export default function Contact() {
               <div className="mt-4 pt-8 border-t border-white/5">
                 <p className="text-slate-600 text-xs uppercase tracking-[0.2em] mb-4 font-bold">Social</p>
                 <div className="flex gap-4">
-                  {/* Instagram Linki */}
                   <a 
                     href="https://www.instagram.com/topdan_kerpic_satisi/" 
                     target="_blank" 
@@ -101,7 +103,6 @@ export default function Contact() {
                   >
                     <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   </a>
-                  {/* Facebook Linki */}
                   <a 
                     href="https://facebook.com/kerpical.az" 
                     target="_blank" 

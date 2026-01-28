@@ -10,31 +10,31 @@ export default function About() {
     az: {
       tag: "Rəqəmsal Körpü",
       title: "Biz kimik?",
-      desc: "Biz kərpic istehsalçıları ilə alıcılar arasında innovativ bir körpüyük. Ənənəvi tikinti sektorunu müasir texnologiya ilə birləşdirərək sizin üçün ən optimal həlləri tapırıq.",
+      desc: "Biz kərpic istehsalçıları ilə alıcılar arasında innovativ bir körpüyük. Ənənəvi tikinti sektorunu müasir texnologiya ilə birləşdirərək sizin üçün ən optimal həlləri tapırıq. Sizi axtarış və müqayisədən azad edirik. Qiymət, keyfiyyət və çatdırılmanı sizin üçün biz kompleks şəkildə qiymətləndirərək, istənilən növ məhsulu birbaşa tikinti sahənizə sürətli və fasiləsiz çatdırırıq.",
       features: [
-        { title: "Zavod Müqayisəsi", desc: "Süni intellekt dəstəkli sistemimizlə zavod təkliflərini anlıq analiz edirik.", icon: <Scale /> },
-        { title: "Sürətli Ünsiyyət", desc: "WhatsApp üzərindən 7/24 kəsintisiz və aydın dialoq imkanı.", icon: <MessageCircle /> },
-        { title: "Maksimum Qənaət", desc: "Həm büdcənizi, həm də ən qiymətli olan vaxtınızı səmərəli qoruyuruq.", icon: <Wallet /> }
+        { title: "Zavod Müqayisəsi", desc: "Bazarı sizin üçün izləyirik. Layihənizin tələbinə uyğun olan, keyfiyyətinə bələd olduğumuz ən etibarlı zavod təklifini təqdim edirik.", icon: <Scale /> },
+        { title: "Sürətli Ünsiyyət", desc: "WhatsApp üzərindən birbaşa bizimlə əlaqə qurun. Sorğunuzu anında cavablandırır, vaxt itirmədən logistika prosesinə başlayırıq.", icon: <MessageCircle /> },
+        { title: "Maksimum Qənaət", desc: "Artıq xərclərdən qaçın. Sizin üçün ən optimal qiymət-keyfiyyət balansını taparaq həm büdcənizi, həm də vaxtınızı qoruyuruq.", icon: <Wallet /> }
       ]
     },
     en: {
       tag: "Digital Bridge",
       title: "Who are we?",
-      desc: "We are an innovative bridge between brick manufacturers and buyers. We combine the traditional construction sector with modern technology.",
+      desc: "We are an innovative bridge between brick manufacturers and buyers. By merging the traditional construction sector with modern technology, we find the most optimal solutions for you. We free you from searching and comparing. We evaluate price, quality, and delivery comprehensively and ensure fast, uninterrupted delivery of any product directly to your construction site.",
       features: [
-        { title: "Factory Comparison", desc: "We analyze factory offers instantly with our AI-backed system.", icon: <Scale /> },
-        { title: "Fast Communication", desc: "24/7 seamless and clear dialogue via WhatsApp.", icon: <MessageCircle /> },
-        { title: "Maximum Savings", desc: "We efficiently protect both your budget and your most valuable time.", icon: <Wallet /> }
+        { title: "Factory Comparison", desc: "We monitor the market for you. We provide the most reliable factory offers that match your project requirements and meet our quality standards.", icon: <Scale /> },
+        { title: "Fast Communication", desc: "Contact us directly via WhatsApp. We answer your inquiries instantly and initiate the logistics process without wasting any time.", icon: <MessageCircle /> },
+        { title: "Maximum Savings", desc: "Avoid unnecessary expenses. We find the perfect price-quality balance for you, protecting both your budget and your valuable time.", icon: <Wallet /> }
       ]
     },
     ru: {
-      tag: "Цифровой мост",
+      tag: "Цифровой Мост",
       title: "Кто мы?",
-      desc: "Мы — инновационный мост между производителями кирпича и покупателями. Мы объединяем традиционный строительный сектор с современными технологиями.",
+      desc: "Мы — инновационный мост между производителями кирпича и покупателями. Объединяя традиционный строительный сектор с современными технологиями, мы находим для вас самые оптимальные решения. Мы освобождаем вас от поиска и сравнения. Мы комплексно оцениваем цену, качество и доставку, обеспечивая быструю и бесперебойную поставку любого вида продукции прямо на вашу строительную площадку.",
       features: [
-        { title: "Сравнение заводов", desc: "Мгновенно анализируем предложения заводов с помощью нашей системы.", icon: <Scale /> },
-        { title: "Быстрая связь", desc: "Круглосуточный бесперебойный диалог через WhatsApp.", icon: <MessageCircle /> },
-        { title: "Максимальная экономия", desc: "Мы эффективно защищаем ваш бюджет и ваше драгоценное время.", icon: <Wallet /> }
+        { title: "Сравнение Заводов", desc: "Мы следим за рынком для вас. Мы предоставляем предложения от самых надежных заводов, качество которых нам известно и которые соответствуют требованиям вашего проекта.", icon: <Scale /> },
+        { title: "Быстрая Связь", desc: "Свяжитесь с нами напрямую через WhatsApp. Мы мгновенно отвечаем на ваши запросы и запускаем процесс логистики без потери времени.", icon: <MessageCircle /> },
+        { title: "Максимальная Экономия", desc: "Избегайте лишних затрат. Мы находим для вас оптимальный баланс цены и качества, защищая как ваш бюджет, так и ваше время.", icon: <Wallet /> }
       ]
     }
   };
@@ -92,7 +92,9 @@ export default function About() {
                 {/* Güvən Qutusu */}
                 <div className="bg-green-600 rounded-2xl w-full h-40 flex flex-col items-center justify-center text-white text-center p-4 shadow-lg shadow-green-900/20 border-b-4 border-green-700">
                   <ShieldCheck className="w-10 h-10 mb-2" />
-                  <span className="text-sm font-black leading-tight uppercase tracking-tighter">100% Güvənli<br/>Təchizat</span>
+                  <span className="text-sm font-black leading-tight uppercase tracking-tighter">
+                    {lang === "az" ? "100% Güvənli Təchizat" : lang === "ru" ? "100% Надежная Поставка" : "100% Secure Supply"}
+                  </span>
                 </div>
 
               </div>

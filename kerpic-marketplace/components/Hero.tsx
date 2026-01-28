@@ -8,21 +8,43 @@ import { ArrowRight } from "lucide-react";
 const content = {
   az: [
     {
-      title: <>Azərbaycanın <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Kərpic Bazarı</span></>,
-      description: "Layihəniz üçün ən uyğun variantı tapmaq üçün etibarlı kərpic zavodları ilə birbaşa işləyirik. Sürətli çatdırılma.",
-      tag: "Canlı Təkliflər",
+      tag: "Etibarlı Seçim",
+      title: (
+        <>
+          Kərpici{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">
+            Zavod Qiymətinə
+          </span>{" "}
+          Elə İndi Sifariş Edin!
+        </>
+      ),
+      description: "Tikintinizin möhkəmliyi kərpicin keyfiyyətindən başlayır. Birbaşa zavoddan sertifikatlı məhsullar və sürətli çatdırılma ilə layihənizi vaxtında tamamlayın.",
       button: "WhatsApp-da qiymət al"
     },
     {
-      title: <>Topdan və Pərakəndə <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Təchizat</span></>,
-      description: "Boşluqlu, dolu və xüsusi kərpiclər. İstənilən həcmdə sifariş və peşəkar yanaşma.",
+      tag: "Peşəkar Təhlil",
+      title: (
+        <>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">
+            Topdan və Pərakəndə
+          </span>{" "}
+          Satış
+        </>
+      ),
+      description: "Hər layihə fərqlidir. Biz sizin texniki tələblərinizə əsasən ən yaxşı istehsalçıları filtrdən keçirir və qiymət baxımından ən ideal olanı seçərək büdcənizi qoruyuruq.",
+      button: "WhatsApp-da qiymət al"
+    },
+    {
       tag: "Geniş Çeşid",
-      button: "WhatsApp-da qiymət al"
-    },
-    {
-      title: <>Bir Sorğu. <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Ən Yaxşı</span> Zavod Seçimi.</>,
-      description: "Tələblərinizi bildirin, biz zavodları müqayisə edərək ən uyğun variantı təqdim edək.",
-      tag: "Ağıllı Seçim",
+      title: (
+        <>
+          Siz Ünvanı Seçin,{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">
+            Biz Gətirək.
+          </span>
+        </>
+      ),
+      description: "Paytaxt daxili, Abşeron və Azərbaycanın bütün rayonlarına birbaşa çatdırılma. Məsafədən asılı olmayaraq, kərpicləriniz təyin olunan vaxtda tam qorunmuş şəkildə ünvanınıza çatır.",
       button: "WhatsApp-da qiymət al"
     },
   ],

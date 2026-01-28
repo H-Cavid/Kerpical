@@ -3,11 +3,15 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { MessageCircle, Menu, X } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation"; // Əlavə edildi
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const router = useRouter(); // Əlavə edildi
+  const pathname = usePathname(); // Əlavə edildi
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,51 +21,62 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Logo klikləndə səhifəni yuxarı çəkir və ya yeniləyir
+  // Dil dəyişmə funksiyası yeniləndi
+  const handleLangChange = (newLang: "az" | "ru" | "en") => {
+    setLang(newLang); // Context-i yeniləyir
+    
+    // URL-i yeniləyirik ki, dinamik səhifələr (slug) dili dərhal qəbul etsin
+    // Mövcud URL-in sonuna ?lang=az/ru/en əlavə edir
+    router.push(`${pathname}?lang=${newLang}`);
+    
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+  };
+
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (window.scrollY === 0) {
-      window.location.reload();
+      window.location.href = "/"; // Səhifəni tam yeniləyərək ana səhifəyə atır
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  // Naviqasiya linkləri
   const navLinks = {
     az: [
-      { name: "Məhsullar", href: "#products" },
-      { name: "Kalkulyator", href: "#calculator" },
-      { name: "Necə işləyir?", href: "#how-it-works" },
-      { name: "Biz kimik", href: "#about" },
-      { name: "Əlaqə", href: "#contact" },
+      { name: "Məhsullar", href: "/#products" },
+      { name: "Kalkulyator", href: "/#calculator" },
+      { name: "Necə işləyir?", href: "/#how-it-works" },
+      { name: "Biz kimik", href: "/#about" },
+      { name: "Əlaqə", href: "/#contact" },
     ],
     en: [
-      { name: "Products", href: "#products" },
-      { name: "Calculator", href: "#calculator" },
-      { name: "How it works", href: "#how-it-works" },
-      { name: "About us", href: "#about" },
-      { name: "Contact", href: "#contact" },
+      { name: "Products", href: "/#products" },
+      { name: "Calculator", href: "/#calculator" },
+      { name: "How it works", href: "/#how-it-works" },
+      { name: "About us", href: "/#about" },
+      { name: "Contact", href: "/#contact" },
     ],
     ru: [
-      { name: "Продукция", href: "#products" },
-      { name: "Калькулятор", href: "#calculator" },
-      { name: "Как это работает", href: "#how-it-works" },
-      { name: "О нас", href: "#about" },
-      { name: "Контакты", href: "#contact" },
+      { name: "Продукция", href: "/#products" },
+      { name: "Калькулятор", href: "/#calculator" },
+      { name: "Как это работает", href: "/#how-it-works" },
+      { name: "О нас", href: "/#about" },
+      { name: "Контакты", href: "/#contact" },
     ],
   };
 
   const currentLinks = navLinks[lang as keyof typeof navLinks] || navLinks.az;
 
-  // Səlis keçid funksiyası
   const scrollToSection = (e: React.MouseEvent, href: string) => {
+    // Əgər başqa səhifədəyiksə (məsələn məhsul səhifəsi), linkə normal klikləsin
+    if (pathname !== "/") return;
+
     e.preventDefault();
-    const targetId = href.replace("#", "");
+    const targetId = href.split("#")[1];
     const elem = document.getElementById(targetId);
     if (elem) {
       elem.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false); // Mobil menyunu bağla
+      setIsMobileMenuOpen(false);
     }
   };
 
@@ -84,7 +99,7 @@ export default function Navbar() {
           kerpical<span className="text-green-500 group-hover:text-green-400 transition-colors">.az</span>
         </a>
 
-        {/* Desktop Menyu - Səlis keçid əlavə olundu */}
+        {/* Desktop Menyu */}
         <div className="hidden lg:flex items-center gap-8">
           {currentLinks.map((link) => (
             <a
@@ -104,7 +119,7 @@ export default function Navbar() {
             {["az", "ru", "en"].map((l) => (
               <button
                 key={l}
-                onClick={() => setLang(l as any)}
+                onClick={() => handleLangChange(l as any)}
                 className={`px-3 py-1.5 rounded-lg text-[10px] font-black transition-all uppercase tracking-tighter ${
                   lang === l 
                     ? "bg-green-600 text-white shadow-lg shadow-green-600/20" 
@@ -157,7 +172,7 @@ export default function Navbar() {
               {["az", "ru", "en"].map((l) => (
                 <button
                   key={l}
-                  onClick={() => { setLang(l as any); setIsMobileMenuOpen(false); }}
+                  onClick={() => handleLangChange(l as any)}
                   className={`flex-1 py-3 rounded-xl font-bold uppercase ${lang === l ? "bg-green-600 text-white" : "bg-white/5 text-slate-500"}`}
                 >
                   {l}
