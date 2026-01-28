@@ -1,111 +1,115 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calculator as CalcIcon, Hash, MoveHorizontal, Layers, MessageCircle } from "lucide-react";
+import { Hash, MoveHorizontal, Layers, MessageCircle, ShieldCheck } from "lucide-react";
 
-const BRICK_TYPES = [
-    { id: "8", name: "8-lik (19x19x8.5)", perSquare: 42 },
-    { id: "10", name: "10-luq (10x19x19)", perSquare: 35 }, // Siyahıya əlavə edildi
-    { id: "13", name: "13-lük (19x19x13.5)", perSquare: 28 },
-    { id: "29", name: "29-luq (19x19x29)", perSquare: 13.5 },
-    { id: "39", name: "39-luq (19x19x39)", perSquare: 10 },
-];
+/**
+ * Professional usta normativləri və texniki ölçülər
+ * Rəqəmlər sahə təcrübəsinə əsaslanan dəqiq hesablamalardır.
+ */
+const BRICK_DATA = {
+  "8": { name: "8.5 × 19 × 19 sm", perSquare: 27, multiMode: false },
+  "10": { name: "10 × 19 × 19 sm", perSquare: 27, multiMode: false },
+  "13": { name: "13.5 × 19 × 19 sm", perSquare: 27, multiMode: false },
+  "29": { name: "29 × 19 × 19 sm", modes: { uzununa: 18, enine: 22 }, multiMode: true },
+  "39": { name: "39 × 19 × 19 sm", modes: { uzununa: 14, enine: 18 }, multiMode: true },
+};
 
 export default function Calculator() {
   const [area, setArea] = useState<number>(0);
-  const [selectedBrick, setSelectedBrick] = useState(BRICK_TYPES[0]);
+  const [type, setType] = useState<keyof typeof BRICK_DATA>("8");
+  const [mode, setMode] = useState<"uzununa" | "enine">("uzununa");
   const [wallType, setWallType] = useState<"single" | "double">("single");
-  const [result, setResult] = useState<number>(0);
+  const [result, setResult] = useState(0);
 
-  // Sıfırlama funksiyası
-  const handleReset = () => {
-    setArea(0);
-    setWallType("single");
-    setSelectedBrick(BRICK_TYPES[0]);
-  };
-
+  // Hesablama məntiqi: Sahə * Normativ əmsalı
   useEffect(() => {
-    let count = area * selectedBrick.perSquare;
+    const selected = BRICK_DATA[type];
+    let count = area * (selected.multiMode ? selected.modes[mode] : selected.perSquare);
     if (wallType === "double") count *= 2;
     setResult(Math.ceil(count));
-  }, [area, selectedBrick, wallType]);
+  }, [area, type, mode, wallType]);
 
-  const whatsappMessage = `Salam, kalkulyatorla hesabladım. ${area} m² sahə üçün ${wallType === "single" ? "tək qat" : "qoşa qat"} ${selectedBrick.name} kərpicindən təxminən ${result} ədəd lazımdır. Qiymət öyrənə bilərəm?`;
+  const whatsappMessage = `Salam, kerpical.az. Layihəm üçün ${area} m² sahəyə ${BRICK_DATA[type].name} kərpicindən (${wallType === "single" ? "tək qat" : "qoşa qat"}) cəmi ${result} ədəd hesabladım. Qiymət təklifi ala bilərəm?`;
 
   return (
-    <section 
-      id="calculator" 
-      onClick={(e) => {
-        // Əgər klik birbaşa section-a və ya ana container-ə dəyərsə sıfırla
-        if ((e.target as HTMLElement).id === "calculator" || (e.target as HTMLElement).classList.contains("container")) {
-          handleReset();
-        }
-      }}
-      className="py-24 bg-slate-950 relative overflow-hidden"
-    >
-      {/* Dekorativ Arxa Fon */}
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-[100px] pointer-events-none"></div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold mb-4 uppercase tracking-widest">
-              <CalcIcon className="w-3 h-3" /> Ağıllı Hesablama
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase italic">
-              Kərpic <span className="text-green-500">Kalkulyatoru</span>
+    <section id="calculator" className="py-20 bg-slate-950 text-white font-sans overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto bg-slate-900/40 backdrop-blur-md rounded-[2.5rem] border border-white/5 p-8 md:p-12 shadow-2xl">
+          
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-black uppercase italic mb-3 tracking-tighter">
+              PEŞƏKAR <span className="text-green-500">HESABLAMA</span>
             </h2>
-            <p className="text-slate-400">Layihəniz üçün lazım olan kərpic sayını saniyələr içində hesablayın.</p>
+            <div className="inline-flex items-center gap-2 bg-green-500/5 border border-green-500/10 px-4 py-2 rounded-full">
+              <ShieldCheck className="w-4 h-4 text-green-500" />
+              <span className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest leading-none">
+                Usta normativlərinə uyğun mühəndislik hesabı
+              </span>
+            </div>
           </div>
 
-          <div 
-            onClick={(e) => e.stopPropagation()} // İçəri klikləyəndə sıfırlanmasın
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-slate-900/40 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[3rem] shadow-2xl"
-          >
-            {/* Giriş Sahələri */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="space-y-6">
+              {/* Sahə Girişi */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold text-slate-300 mb-3 uppercase italic">
-                  <Hash className="w-4 h-4 text-green-500" /> Divar Sahəsi (m²)
-                </label>
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Layihə Sahəsi (m²)</label>
                 <input
                   type="number"
-                  placeholder="Məsələn: 50"
-                  value={area === 0 ? "" : area} // 0 olanda boş görünsün
+                  placeholder="Məsələn: 100"
                   onChange={(e) => setArea(Number(e.target.value))}
-                  className="w-full bg-slate-800/50 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-green-500/50 transition-all font-bold text-lg"
+                  className="w-full bg-slate-800/40 border border-white/10 rounded-2xl py-4 px-6 focus:border-green-500 outline-none transition-all font-bold text-lg placeholder:text-slate-600"
                 />
               </div>
 
+              {/* Texniki Ölçü Seçimi */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold text-slate-300 mb-3 uppercase italic">
-                  <Layers className="w-4 h-4 text-green-500" /> Kərpic Növü
-                </label>
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Kərpicin Texniki Ölçüsü</label>
                 <select
-                  value={selectedBrick.id}
-                  onChange={(e) => setSelectedBrick(BRICK_TYPES.find(b => b.id === e.target.value) || BRICK_TYPES[0])}
-                  className="w-full bg-slate-800/50 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-green-500/50 transition-all font-bold"
+                  value={type}
+                  onChange={(e) => setType(e.target.value as any)}
+                  className="w-full bg-slate-800/40 border border-white/10 rounded-2xl py-4 px-6 font-bold outline-none cursor-pointer hover:border-white/20 transition-all appearance-none"
                 >
-                  {BRICK_TYPES.map(type => (
-                    <option key={type.id} value={type.id} className="bg-slate-900">{type.name}</option>
+                  {Object.entries(BRICK_DATA).map(([key, val]) => (
+                    <option key={key} value={key} className="bg-slate-900">{val.name}</option>
                   ))}
                 </select>
               </div>
 
+              {/* Hörgü Metodu - Yalnız 29/39 ölçülərində aktiv olur */}
+              {BRICK_DATA[type].multiMode && (
+                <div className="pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block italic text-center md:text-left">Hörgü Metodu</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button 
+                      onClick={() => setMode("uzununa")} 
+                      className={`py-3 rounded-xl font-bold border transition-all ${mode === "uzununa" ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20" : "bg-white/5 border-white/5 text-slate-400 hover:border-white/10"}`}
+                    >
+                      Uzununa
+                    </button>
+                    <button 
+                      onClick={() => setMode("enine")} 
+                      className={`py-3 rounded-xl font-bold border transition-all ${mode === "enine" ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20" : "bg-white/5 border-white/5 text-slate-400 hover:border-white/10"}`}
+                    >
+                      Eninə
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Divar Qalınlığı (Qat) */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold text-slate-300 mb-3 uppercase italic">
-                  <MoveHorizontal className="w-4 h-4 text-green-500" /> Divar Qalınlığı
-                </label>
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    onClick={() => setWallType("single")}
-                    className={`py-3 rounded-xl font-bold transition-all border ${wallType === "single" ? "bg-green-500 text-white border-green-500 shadow-lg shadow-green-500/20" : "bg-white/5 text-slate-400 border-white/5 hover:border-white/10"}`}
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block text-center md:text-left">Divar Qalınlığı</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button 
+                    onClick={() => setWallType("single")} 
+                    className={`py-3 rounded-xl font-bold border transition-all ${wallType === "single" ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20" : "bg-white/5 border-white/5 text-slate-400 hover:border-white/10"}`}
                   >
                     Tək Qat
                   </button>
-                  <button
-                    onClick={() => setWallType("double")}
-                    className={`py-3 rounded-xl font-bold transition-all border ${wallType === "double" ? "bg-green-500 text-white border-green-500 shadow-lg shadow-green-500/20" : "bg-white/5 text-slate-400 border-white/5 hover:border-white/10"}`}
+                  <button 
+                    onClick={() => setWallType("double")} 
+                    className={`py-3 rounded-xl font-bold border transition-all ${wallType === "double" ? "bg-green-600 border-green-600 text-white shadow-lg shadow-green-600/20" : "bg-white/5 border-white/5 text-slate-400 hover:border-white/10"}`}
                   >
                     Qoşa Qat
                   </button>
@@ -113,23 +117,31 @@ export default function Calculator() {
               </div>
             </div>
 
-            {/* Nəticə Sahəsi */}
-            <div className="flex flex-col justify-center items-center p-8 bg-green-500/5 border border-green-500/10 rounded-[2.5rem] text-center">
-              <span className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-2">Təxmini ehtiyac</span>
-              <div className="text-6xl md:text-7xl font-black text-white mb-2 italic">
-                {result} <span className="text-2xl text-green-500 not-italic">ədəd</span>
+            {/* Nəticə Paneli - "ədəd" yazısı dizaynı yeniləndi */}
+            <div className="bg-gradient-to-br from-green-500/10 via-transparent to-transparent border border-green-500/10 rounded-[2.5rem] p-10 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+              <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Material Ehtiyacı</span>
+              
+              <div className="flex flex-col items-center mb-2">
+                <span className="text-7xl md:text-8xl font-black italic tracking-tighter leading-none group-hover:scale-105 transition-transform duration-500">
+                  {result}
+                </span>
+                <span className="text-green-500 text-sm font-bold uppercase tracking-[0.5em] mt-3 opacity-90">
+                  ədəd
+                </span>
               </div>
-              <p className="text-slate-500 text-xs mb-8 max-w-[200px]">
-                * Hesablama standart dərz boşluqları nəzərə alınaraq aparılıb.
+              
+              <p className="mt-8 text-[9px] text-slate-600 uppercase font-medium leading-relaxed max-w-[220px]">
+                * Professional hörgü normativləri və standart dərz boşluqları daxil edilərək hesablanmışdır.
               </p>
-
+              
               <a
                 href={`https://wa.me/994776235836?text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
-                className="w-full bg-green-600 hover:bg-green-500 text-white py-4 rounded-2xl flex items-center justify-center gap-3 font-black transition-all shadow-xl hover:shadow-green-500/20 active:scale-95 border-b-4 border-green-700 hover:border-green-600"
+                rel="noopener noreferrer"
+                className="w-full mt-10 bg-green-600 hover:bg-green-500 py-5 rounded-2xl flex items-center justify-center gap-3 font-black text-lg transition-all shadow-xl shadow-green-600/20 active:scale-95 border-b-4 border-green-800"
               >
-                <MessageCircle className="w-5 h-5" />
-                Sifariş Ver
+                <MessageCircle className="w-6 h-6 fill-current" />
+                SİFARİŞİ TAMAMLA
               </a>
             </div>
           </div>
