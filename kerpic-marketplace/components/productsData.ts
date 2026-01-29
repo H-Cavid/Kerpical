@@ -5,8 +5,9 @@ export const productsData = {
       name: "KƏRPİC: 8.5x19x19",
       img: "/images/bricks/19x19x8.5/8_5_angle.jpg",
       gallery: [
-        "/images/bricks/19x19x8.5/8_5_angle.jpg",
+        "/images/bricks/19x19x8.5/8_5_dimensions.jpg",
         "/images/bricks/19x19x8.5/8_5_angle2.jpg",
+        "/images/bricks/19x19x8.5/8_5_angle.jpg",
         "/images/bricks/19x19x8.5/8_5_angle3.jpg",
         "/images/bricks/19x19x8.5/8_5_front.jpg"
       ],
@@ -28,8 +29,9 @@ export const productsData = {
       name: "KƏRPİC: 10.5x19x19",
       img: "/images/bricks/19x19x10.5/10_5_angle.jpg",
       gallery: [
-        "/images/bricks/19x19x10.5/10_5_angle.jpg",
+        "/images/bricks/19x19x10.5/10_5_dimensions.png",
         "/images/bricks/19x19x10.5/10_5_angle2.jpg",
+        "/images/bricks/19x19x10.5/10_5_angle.jpg",
         "/images/bricks/19x19x10.5/10_5_front.jpg",
         "/images/bricks/19x19x10.5/10_5_side.jpg"
       ],
@@ -51,8 +53,10 @@ export const productsData = {
       name: "KƏRPİC: 13.5x19x19",
       img: "/images/bricks/19x19x13.5/13_5_angle.jpg",
       gallery: [
-        "/images/bricks/19x19x13.5/13_5_angle.jpg",
+        
+        "/images/bricks/19x19x13.5/13_5_dimensions.png",
         "/images/bricks/19x19x13.5/13_5_angle2.jpg",
+        "/images/bricks/19x19x13.5/13_5_angle.jpg",
         "/images/bricks/19x19x13.5/13_5_angle3.jpg",
         "/images/bricks/19x19x13.5/13_5_front.jpg",
         "/images/bricks/19x19x13.5/13_5_top.jpg"
@@ -76,9 +80,9 @@ export const productsData = {
       img: "/images/bricks/19x19x29/29_angle.jpg",
       gallery: [
         "/images/bricks/19x19x29/29_dimensions.jpg",
+        "/images/bricks/19x19x29/29_side.jpg",
         "/images/bricks/19x19x29/29_angle.jpg",
         "/images/bricks/19x19x29/29_angle2.jpg",
-        "/images/bricks/19x19x29/29_side.jpg",
         "/images/bricks/19x19x29/29_top.jpg"
       ],
       dims: { l: "29 sm", w: "19 sm", h: "19 sm", model: "29x19x19" },
