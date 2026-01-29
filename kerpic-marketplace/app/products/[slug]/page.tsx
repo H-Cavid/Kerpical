@@ -11,15 +11,12 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const resolvedParams = use(params);
   const slug = resolvedParams.slug;
   
-  // URL-dən və Context-dən dili alırıq (Problemi həll edən hissə)
   const searchParams = useSearchParams();
   const { lang: contextLang } = useLanguage(); 
   const urlLang = searchParams.get("lang");
   const currentLang = (urlLang || contextLang || "az") as "az" | "en" | "ru";
 
-  // Seçilmiş dilə uyğun məhsulu tapırıq
   const product = productsData[currentLang]?.find((p) => p.slug === slug);
-  
   const [activeImg, setActiveImg] = useState("");
 
   useEffect(() => {
@@ -32,7 +29,14 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     }
   }, [product, currentLang]);
 
-  // UI Tərcümələri (Köhnə dizayndakı mətnlər)
+  // Səlis sürüşmə (Smooth Scroll) funksiyası
+  const scrollToDetails = () => {
+    const element = document.getElementById('details');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const t = {
     az: { back: "Geri qayıt", order: "WhatsApp ilə sifariş et", more: "Ətraflı məlumat üçün aşağı", why: "Niyə bu ölçü?", usage: "İstifadə Sahələri", dims: { l: "Uzunluq", w: "En", h: "Hündürlük", m: "Model" }, wp: "sifariş etmək istəyirəm." },
     en: { back: "Back", order: "Order via WhatsApp", more: "Scroll down for more", why: "Why this size?", usage: "Usage Areas", dims: { l: "Length", w: "Width", h: "Height", m: "Model" }, wp: "I want to order." },
@@ -62,33 +66,23 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-10">
           
           <div className="flex flex-col gap-4">
-            {/* Şəkil Qutusu - Köhnə Dizayn Watermark və Etiket ilə */}
             <div className="relative aspect-square bg-white rounded-[2rem] flex items-center justify-center overflow-hidden shadow-2xl max-h-[400px] md:max-h-[450px] group/main border-4 border-slate-900/50">
-                
                 <img 
                   src={activeImg || product.img} 
                   alt={product.name} 
                   className="w-full h-full object-contain p-8 transition-all duration-700 group-hover/main:scale-105 z-10 relative" 
                 />
-                
-                {/* 1. Watermark Pattern */}
                 <div 
-                   className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.05] rotate-[-15deg] scale-125"
+                   className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.09] rotate-[-15deg] scale-125"
                    style={{
                      backgroundImage: `url('/logo.png')`,
                      backgroundSize: '100px',
                      backgroundRepeat: 'repeat'
                    }}
                 ></div>
-
-                {/* 2. Etiket */}
                 <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-30 pointer-events-none select-none">
                   <div className="bg-slate-900/90 backdrop-blur-2xl px-5 py-3 rounded-2xl border border-white/20 flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover/main:scale-110 group-hover/main:-translate-y-2">
-                      <img 
-                        src="/logo.png" 
-                        alt="kerpical.az" 
-                        className="h-7 md:h-8 w-auto object-contain"
-                      />
+                      <img src="/logo.png" alt="logo" className="h-7 md:h-8 w-auto object-contain" />
                       <div className="w-[1px] h-6 bg-white/20"></div>
                       <div className="flex flex-col">
                         <span className="text-[10px] font-black tracking-[0.3em] text-green-500 uppercase leading-none mb-1">Original</span>
@@ -98,7 +92,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 </div>
             </div>
 
-            {/* Qalereya */}
             <div className="flex justify-center gap-3 flex-wrap">
               {(product.gallery && product.gallery.length > 0 ? product.gallery : [product.img]).map((img, index) => (
                 <button
@@ -109,14 +102,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   }`}
                 >
                   <img src={img} alt="thumbnail" className="w-full h-full object-contain rounded-lg z-10 relative" />
-                  <div 
-                    className="absolute inset-0 z-20 opacity-[0.03] pointer-events-none"
-                    style={{
-                      backgroundImage: `url('/logo.png')`,
-                      backgroundSize: '20px',
-                      backgroundRepeat: 'repeat'
-                    }}
-                  ></div>
                 </button>
               ))}
             </div>
@@ -157,14 +142,20 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 {t.order}
               </a>
             </div>
-            <div className="flex items-center justify-center gap-2 text-slate-500 animate-bounce pt-4 text-sm font-bold">
+
+            {/* UPDATE: İndi kliklənə bilən düymədir */}
+            <button 
+              onClick={scrollToDetails}
+              className="w-full flex items-center justify-center gap-2 text-slate-500 hover:text-white transition-colors pt-4 text-sm font-bold group"
+            >
               <span>{t.more}</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
+              <ChevronDown className="w-4 h-4 animate-bounce group-hover:text-green-500" />
+            </button>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-white/5">
+        {/* UPDATE: Hədəf nöqtə (ID bura əlavə olundu) */}
+        <div id="details" className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-white/5 scroll-mt-24">
           <div className="space-y-6">
             <h3 className="text-xl font-black flex items-center gap-3 text-white uppercase tracking-wider italic">
               <Zap className="text-green-500 w-5 h-5 fill-green-500" /> {t.why}

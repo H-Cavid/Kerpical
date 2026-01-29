@@ -8,7 +8,6 @@ export default function Products() {
   const { lang } = useLanguage();
   const WHATSAPP_NUMBER = "994776235836";
 
-  // Sabit mətnlərin tərcüməsi
   const t = {
     title: { az: "Məhsullarımız", en: "Our Products", ru: "Наша Продукция" },
     moreInfo: { az: "Ətraflı məlumat", en: "More details", ru: "Подробнее" },
@@ -20,11 +19,11 @@ export default function Products() {
     }
   };
 
-  // Mövcud dilə uyğun datanı götürürük, əgər yoxdursa AZ-a qayıdırıq
   const currentProducts = productsData[lang as keyof typeof productsData] || productsData.az;
 
   return (
-    <section className="py-20 px-4">
+    /* scroll-mt-24 əlavə edildi ki, skrol zamanı yuxarıdan boşluq qalsın */
+    <section id="products" className="py-20 px-4 scroll-mt-24">
       <div className="container mx-auto">
         <h2 className="text-4xl font-black text-white text-center mb-12 uppercase italic">
           {t.title[lang as keyof typeof t.title]}
@@ -36,16 +35,17 @@ export default function Products() {
               key={product.slug} 
               className="bg-slate-900/50 border border-white/5 rounded-[2rem] p-6 hover:border-green-500/50 transition-all group flex flex-col"
             >
-              <div className="relative aspect-square mb-6 overflow-hidden rounded-2xl bg-white flex items-center justify-center group/card border border-white/5 shadow-inner">
-                
-                {/* 1. Əsas Məhsul Şəkli */}
+              {/* ŞƏKİL HİSSƏSİ */}
+              <Link 
+                href={`/products/${product.slug}?lang=${lang}`}
+                className="relative aspect-square mb-6 overflow-hidden rounded-2xl bg-white flex items-center justify-center group/card border border-white/5 shadow-inner cursor-pointer"
+              >
                 <img 
                   src={product.img} 
                   alt={product.name} 
-                  className="w-full h-full object-contain p-4 z-10 relative transition-transform duration-500 group-hover/card:scale-105" 
+                  className="w-full h-full object-contain p-4 z-10 relative transition-transform duration-500 group-hover/card:scale-110" 
                 />
 
-                {/* 2. Watermark (Pattern) */}
                 <div 
                   className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.05] rotate-[-15deg] scale-125 transition-opacity"
                   style={{
@@ -55,7 +55,6 @@ export default function Products() {
                   }}
                 ></div>
 
-                {/* 3. Brend Etiketi */}
                 <div className="absolute bottom-3 right-3 z-30 pointer-events-none select-none">
                    <div className="bg-slate-900/90 backdrop-blur-md px-4 py-5 rounded-xl border border-white/10 flex items-center gap-2 shadow-xl transition-all duration-300 group-hover/card:scale-110 group-hover/card:-translate-y-1">
                       <img 
@@ -69,14 +68,14 @@ export default function Products() {
                       </span>
                    </div>
                 </div>
-              </div>
+              </Link>
               
               <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
               <p className="text-slate-400 text-sm mb-6 line-clamp-2 flex-grow">{product.desc}</p>
               
               <div className="space-y-3">
                 <Link 
-                  href={`/products/${product.slug}`}
+                  href={`/products/${product.slug}?lang=${lang}`}
                   className="flex items-center justify-center gap-2 w-full bg-slate-800/40 hover:bg-slate-700/60 text-white py-3 rounded-xl font-semibold transition-all border border-white/5"
                 >
                   <Info className="w-4 h-10 text-green-500" />

@@ -35,7 +35,7 @@ export default function Home() {
       <Contact />
       
       {/* Alt Hissə */}
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

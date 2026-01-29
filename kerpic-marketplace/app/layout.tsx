@@ -1,9 +1,10 @@
 "use client";
 
 import { Analytics } from '@vercel/analytics/react';
-import { GoogleAnalytics } from '@next/third-parties/google'; // Kitabxananı bura daxil edirik
+import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer"; // 1. Footer-i bura daxil edirik
 import { LanguageProvider } from "../components/LanguageContext";
 
 export default function RootLayout({
@@ -12,18 +13,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    /* suppressHydrationWarning brauzer extension-larının (məs: bis_skin_checked) 
-       yaratdığı xətaların qarşısını almaq üçündür */
     <html lang="az" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className="bg-slate-950">
         <LanguageProvider>
+          {/* Navbar bütün səhifələrdə yuxarıda görünəcək */}
           <Navbar />
-          {children}
           
-          {/* Vercel Analytics - Saytın sürətini ölçmək üçün */}
+          {/* children - hər bir səhifənin (ana səhifə, məhsul səhifəsi və s.) məzmunudur */}
+          <main className="min-h-screen">
+            {children}
+          </main>
+          
+          {/* 2. Footer-i bura əlavə etdik ki, bütün səhifələrin sonunda görünsün */}
+          <Footer />
+          
           <Analytics /> 
-          
-          {/* Google Analytics - İstifadəçi davranışlarını (İnstagram-dan gələnləri və s.) izləmək üçün */}
           <GoogleAnalytics gaId="G-RZVRKHM5QZ" /> 
         </LanguageProvider>
       </body>

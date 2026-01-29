@@ -71,29 +71,29 @@ export default function Contact() {
 
             {/* Sağ tərəf: Detallar */}
             <div className="md:w-2/5 p-8 md:p-16 bg-white/[0.02] flex flex-col justify-center gap-8">
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
+              <div className="flex items-center gap-4 group"> {/* items-start -> items-center edildi */}
+                <div className="w-12 h-12 flex-shrink-0 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-white font-bold mb-1">{current.hours}</p>
+                  <p className="text-white font-bold mb-0.5">{current.hours}</p>
                   <p className="text-slate-500 text-sm">{current.days}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
+              <div className="flex items-center gap-4 group"> {/* items-start -> items-center edildi */}
+                <div className="w-12 h-12 flex-shrink-0 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-white font-bold mb-1">{current.location}</p>
+                  <p className="text-white font-bold mb-0.5">{current.location}</p>
                   <p className="text-slate-500 text-sm">{current.deliveryDesc}</p>
                 </div>
               </div>
 
               {/* Yenilənmiş Sosial Media Hissəsi */}
               <div className="mt-4 pt-8 border-t border-white/5">
-                <p className="text-slate-600 text-xs uppercase tracking-[0.2em] mb-4 font-bold">Social</p>
+                <p className="text-slate-600 text-[10px] uppercase tracking-[0.2em] mb-5 font-bold">Social</p>
                 <div className="flex gap-4">
                   <a 
                     href="https://www.instagram.com/topdan_kerpic_satisi/" 
