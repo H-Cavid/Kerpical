@@ -1,19 +1,27 @@
-import { Metadata, Viewport } from "next"; // Viewport-u əlavə etdik
+import { Metadata, Viewport } from "next";
 import ClientLayout from "./ClientLayout";
 import "./globals.css";
 
-// Ekran tənzimləmələri Next.js 14+ üçün belə olmalıdır
+// Ekran tənzimləmələri
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  // Başlıq və Təsvir
+  // 1. Terminaldakı sarı xəbərdarlığı həll edən sətir
+  metadataBase: new URL("https://kerpical.az"),
+
+  // 2. Google Search Console doğrulama kodu
+  verification: {
+    google: "xxXWryy0izDxB9kAwio4m_tIW44X4KTMRcOZHjup-1s",
+  },
+
+  // 3. Başlıq və Təsvir (SEO)
   title: "kerpical.az | Topdan Qiymətə Kərpic Satışı (Kerpic Satisi) və Müqayisəsi",
   description: "Zavod və topdan qiymətə kərpic satışı. Bakı və bölgələrə çatdırılma. Ən ucuz kerpic qiymetleri üçün zavodları müqayisə edin və birbaşa sifariş edin.",
-  
-  // Sənin genişləndirdiyin mükəmməl açar sözlər siyahısı
+
+  // 4. Sənin istədiyin geniş açar sözlər siyahısı (ə və e hərfləri ilə)
   keywords: [
     "kərpic", "kerpic", "kərpic qiymətləri", "kerpic qiymetleri",
     "topdan kərpic satışı", "topdan kerpic satisi", "ucuz kərpic",
@@ -25,11 +33,11 @@ export const metadata: Metadata = {
     "dekorativ kərpic", "dekorativ kerpic", "kərpic alətləri", "kerpic aletleri",
     "kerpical", "kerpical.az", "onlayn kerpic satışı"
   ],
-  
+
   authors: [{ name: "kerpical.az" }],
   robots: "index, follow",
 
-  // Sosial media paylaşım görüntüsü (WhatsApp, FB, LinkedIn)
+  // 5. Sosial media görüntüsü (WhatsApp və s. üçün)
   openGraph: {
     title: "kerpical.az - Topdan Qiymətə Kərpic (Kerpic) Satışı",
     description: "Zavodları müqayisə et, ən yaxşı topdan qiyməti seç. Siz ünvanı seçin, biz gətirək!",
@@ -47,7 +55,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  // İkonlar (Favicon)
+  // 6. İkonlar
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
