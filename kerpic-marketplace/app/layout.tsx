@@ -1,11 +1,22 @@
-"use client";
-
-import { Analytics } from '@vercel/analytics/react';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { Metadata } from "next";
+import ClientLayout from "./ClientLayout";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"; // 1. Footer-i bura daxil edirik
-import { LanguageProvider } from "../components/LanguageContext";
+
+export const metadata: Metadata = {
+  title: "kerpical.az | Azərbaycanın Kərpic Platforması",
+  description: "Zavodları müqayisə edin, ən uyğun kərpic təklifini tapın.",
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
+};
 
 export default function RootLayout({
   children,
@@ -14,22 +25,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="az" suppressHydrationWarning>
-      <body suppressHydrationWarning className="bg-slate-950">
-        <LanguageProvider>
-          {/* Navbar bütün səhifələrdə yuxarıda görünəcək */}
-          <Navbar />
-          
-          {/* children - hər bir səhifənin (ana səhifə, məhsul səhifəsi və s.) məzmunudur */}
-          <main className="min-h-screen">
-            {children}
-          </main>
-          
-          {/* 2. Footer-i bura əlavə etdik ki, bütün səhifələrin sonunda görünsün */}
-          <Footer />
-          
-          <Analytics /> 
-          <GoogleAnalytics gaId="G-RZVRKHM5QZ" /> 
-        </LanguageProvider>
+      <body className="bg-slate-950">
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
