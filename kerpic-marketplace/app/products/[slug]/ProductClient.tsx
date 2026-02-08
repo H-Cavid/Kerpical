@@ -35,9 +35,9 @@ export default function ProductClient({ slug }: { slug: string }) {
   };
 
   const t = {
-    az: { back: "Geri qayıt", order: "WhatsApp ilə sifariş et", more: "Ətraflı məlumat üçün aşağı", why: "Niyə bu ölçü?", usage: "İstifadə Sahələri", dims: { l: "Uzunluq", w: "En", h: "Hündürlük", m: "Model" }, wp: "sifariş etmək istəyirəm." },
-    en: { back: "Back", order: "Order via WhatsApp", more: "Scroll down for more", why: "Why this size?", usage: "Usage Areas", dims: { l: "Length", w: "Width", h: "Height", m: "Model" }, wp: "I want to order." },
-    ru: { back: "Назад", order: "Заказать через WhatsApp", more: "Подробнее ниже", why: "Почему этот размер?", usage: "Области применения", dims: { l: "Длина", w: "Ширина", h: "Высота", m: "Модель" }, wp: "я хочу заказать." }
+    az: { back: "Geri qayıt", order: "WhatsApp ilə sifariş et", more: "Ətraflı məlumat üçün aşağı", why: "Niyə bu ölçü?", usage: "İstifadə Sahələri", dims: { l: "Uzunluq", w: "En", h: "Hündürlük", m: "Model" }, wp: "sifariş etmək istəyirəm.", seoAlt: "Kərpic Satışı və Hesablanması", otherSizes: "Digər ölçülər" },
+    en: { back: "Back", order: "Order via WhatsApp", more: "Scroll down for more", why: "Why this size?", usage: "Usage Areas", dims: { l: "Length", w: "Width", h: "Height", m: "Model" }, wp: "I want to order.", seoAlt: "Brick Sale and Calculation", otherSizes: "Other sizes" },
+    ru: { back: "Назад", order: "Заказать через WhatsApp", more: "Подробнее ниже", why: "Почему этот размер?", usage: "Области применения", dims: { l: "Длина", w: "Ширина", h: "Высота", m: "Модель" }, wp: "я хочу заказать.", seoAlt: "Продажа и Расчет Кирпича", otherSizes: "Другие размеры" }
   }[currentLang];
 
   if (!product) {
@@ -64,7 +64,7 @@ export default function ProductClient({ slug }: { slug: string }) {
             <div className="relative aspect-square bg-white rounded-[2rem] flex items-center justify-center overflow-hidden shadow-2xl max-h-[400px] md:max-h-[450px] group/main border-4 border-slate-900/50">
                 <img 
                   src={activeImg || product.img} 
-                  alt={product.name} 
+                  alt={`${product.name} - ${t.seoAlt} | Kerpical.az`} 
                   className="w-full h-full object-contain p-8 transition-all duration-700 group-hover/main:scale-105 z-10 relative" 
                 />
                 <div className="absolute inset-0 z-20 pointer-events-none select-none opacity-[0.09] rotate-[-15deg] scale-125" style={{backgroundImage: `url('/logo.png')`, backgroundSize: '100px', backgroundRepeat: 'repeat'}}></div>
@@ -83,7 +83,11 @@ export default function ProductClient({ slug }: { slug: string }) {
             <div className="flex justify-center gap-3 flex-wrap">
               {(product.gallery && product.gallery.length > 0 ? product.gallery : [product.img]).map((img, index) => (
                 <button key={index} onClick={() => setActiveImg(img)} className={`w-16 h-16 rounded-xl border-2 transition-all overflow-hidden bg-white p-1 relative ${activeImg === img ? "border-green-500 scale-105 shadow-lg" : "border-transparent opacity-50 hover:opacity-100"}`}>
-                  <img src={img} alt="thumbnail" className="w-full h-full object-contain rounded-lg z-10 relative" />
+                  <img 
+                    src={img} 
+                    alt={`${product.name} - ${t.seoAlt} - Görünüş ${index + 1}`} 
+                    className="w-full h-full object-contain rounded-lg z-10 relative" 
+                  />
                 </button>
               ))}
             </div>
@@ -147,6 +151,37 @@ export default function ProductClient({ slug }: { slug: string }) {
             </div>
           </div>
         </div>
+
+        {/* --- YENİ: Daxili Linkləmə (Digər Ölçülər) Bölməsi --- */}
+        <div className="mt-20 pt-10 border-t border-white/5">
+          <h3 className="text-2xl font-black text-white uppercase italic mb-8 flex items-center gap-3">
+            <Layers className="text-green-500 w-6 h-6" /> {t.otherSizes}
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {productsData[currentLang]
+              ?.filter((p) => p.slug !== slug)
+              .slice(0, 4)
+              .map((item) => (
+                <Link 
+                  key={item.slug} 
+                  href={`/products/${item.slug}?lang=${currentLang}`}
+                  className="bg-slate-900/50 border border-white/5 p-4 rounded-3xl hover:border-green-500/50 transition-all group"
+                >
+                  <div className="aspect-square bg-white rounded-2xl mb-4 p-4 overflow-hidden shadow-inner">
+                    <img 
+                      src={item.img} 
+                      alt={`${item.name} - Kerpical.az Digər Variant`} 
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  <h4 className="text-xs md:text-sm font-black text-slate-300 group-hover:text-green-500 transition-colors uppercase italic leading-tight text-center">
+                    {item.name}
+                  </h4>
+                </Link>
+              ))}
+          </div>
+        </div>
+        {/* -------------------------------------------------- */}
       </div>
     </div>
   );
