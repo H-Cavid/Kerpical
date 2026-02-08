@@ -6,6 +6,8 @@ import Link from "next/link";
 import { MessageCircle, ArrowLeft, CheckCircle2, Zap, Layers, ChevronDown } from "lucide-react";
 import { productsData } from "@/components/productsData"; 
 import { useLanguage } from "@/components/LanguageContext"; 
+// Analitika funksiyasını import edirik
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
@@ -136,6 +138,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             <div className="space-y-4">
               <a 
                 href={`https://wa.me/994776235836?text=${encodeURIComponent(product.name + " " + t.wp)}`}
+                onClick={() => trackWhatsAppClick("Product Page")}
                 className="w-full bg-green-600 hover:bg-green-500 text-white py-5 rounded-2xl flex items-center justify-center gap-3 font-black text-lg transition-all shadow-xl hover:shadow-green-500/20 active:scale-95 border-b-4 border-green-700 hover:border-green-600"
               >
                 <MessageCircle className="w-6 h-6" /> 

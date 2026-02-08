@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageContext";
 import { ArrowRight } from "lucide-react";
+// Analitika funksiyasını import edirik
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 /* ===== Slider content ===== */
 const content = {
@@ -150,6 +152,7 @@ export default function Hero() {
               <a
                 href="https://wa.me/994776235836"
                 target="_blank"
+                onClick={() => trackWhatsAppClick(`Hero Slide ${index + 1}`)}
                 className="bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-black transition-all shadow-[0_20px_40px_rgba(34,197,94,0.3)] flex items-center gap-3 group active:scale-95"
               >
                 {slides[index].button}
@@ -198,19 +201,14 @@ export default function Hero() {
                 }}
               ></div>
               
-              {/* 2 DƏFƏ BÖYÜDÜLMÜŞ PROFESSIONAL KÜNC LOQOSU */}
+              {/* PROFESSIONAL KÜNC LOQOSU */}
               <div className="absolute bottom-6 right-6 z-30 pointer-events-none select-none">
                 <div className="bg-slate-900/95 backdrop-blur-xl px-6 py-4 rounded-2xl border border-white/20 flex items-center gap-5 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-110">
-                  {/* Loqo h-4-dən h-8-ə qaldırıldı */}
                   <img src="/logo.png" alt="logo" className="h-8 md:h-9 w-auto object-contain" />
-                  
-                  {/* Divider h-3-dən h-6-ya qaldırıldı */}
                   <div className="w-[1px] h-6 bg-white/20"></div>
-                  
-                  {/* Mətn text-[10px]-dən text-sm-ə qaldırıldı */}
                   <div className="flex flex-col">
                     <span className="text-xs md:text-sm font-black text-green-500 uppercase tracking-[0.3em] leading-none mb-1">
-                     Premium
+                      Premium
                     </span>
                     <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none">
                       Original

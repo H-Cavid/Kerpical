@@ -3,15 +3,17 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { MessageCircle, Menu, X } from "lucide-react";
-import { useRouter, usePathname } from "next/navigation"; // Əlavə edildi
+import { useRouter, usePathname } from "next/navigation";
+// Analitika funksiyasını import edirik
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  const router = useRouter(); // Əlavə edildi
-  const pathname = usePathname(); // Əlavə edildi
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,21 +23,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Dil dəyişmə funksiyası yeniləndi
   const handleLangChange = (newLang: "az" | "ru" | "en") => {
-    setLang(newLang); // Context-i yeniləyir
+    // Dil dəyişmə hadisəsini izləyirik (Opsional)
+    // window.gtag?.('event', 'language_change', { language: newLang });
     
-    // URL-i yeniləyirik ki, dinamik səhifələr (slug) dili dərhal qəbul etsin
-    // Mövcud URL-in sonuna ?lang=az/ru/en əlavə edir
+    setLang(newLang);
     router.push(`${pathname}?lang=${newLang}`);
-    
     if (isMobileMenuOpen) setIsMobileMenuOpen(false);
   };
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (window.scrollY === 0) {
-      window.location.href = "/"; // Səhifəni tam yeniləyərək ana səhifəyə atır
+      window.location.href = "/";
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -68,7 +68,6 @@ export default function Navbar() {
   const currentLinks = navLinks[lang as keyof typeof navLinks] || navLinks.az;
 
   const scrollToSection = (e: React.MouseEvent, href: string) => {
-    // Əgər başqa səhifədəyiksə (məsələn məhsul səhifəsi), linkə normal klikləsin
     if (pathname !== "/") return;
 
     e.preventDefault();
@@ -135,6 +134,7 @@ export default function Navbar() {
             href="https://wa.me/994776235836"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("Navbar Desktop")}
             className="bg-green-600 hover:bg-green-500 text-white px-6 py-2.5 rounded-xl text-xs font-black transition-all flex items-center gap-2 shadow-xl shadow-green-600/10 active:scale-95 border-b-2 border-green-800"
           >
             <MessageCircle className="w-4 h-4" />
@@ -181,6 +181,9 @@ export default function Navbar() {
             </div>
             <a
               href="https://wa.me/994776235836"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("Navbar Mobile")}
               className="w-full bg-green-600 text-white py-4 rounded-xl font-black text-center shadow-lg"
             >
               WHATSAPP İLƏ ƏLAQƏ

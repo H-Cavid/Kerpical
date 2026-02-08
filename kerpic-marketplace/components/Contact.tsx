@@ -2,6 +2,8 @@
 
 import { useLanguage } from "./LanguageContext";
 import { MessageCircle, Clock, MapPin, Send, Instagram, Facebook } from "lucide-react";
+// Analitika funksiyasını import edirik
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 export default function Contact() {
   const { lang } = useLanguage();
@@ -61,6 +63,7 @@ export default function Contact() {
                 href="https://wa.me/994776235836"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("Contact Section")}
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all shadow-[0_20px_40px_rgba(34,197,94,0.2)] group"
               >
                 <MessageCircle className="w-6 h-6" />
@@ -71,7 +74,7 @@ export default function Contact() {
 
             {/* Sağ tərəf: Detallar */}
             <div className="md:w-2/5 p-8 md:p-16 bg-white/[0.02] flex flex-col justify-center gap-8">
-              <div className="flex items-center gap-4 group"> {/* items-start -> items-center edildi */}
+              <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 flex-shrink-0 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
                   <Clock className="w-6 h-6" />
                 </div>
@@ -81,7 +84,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 group"> {/* items-start -> items-center edildi */}
+              <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 flex-shrink-0 bg-slate-800 rounded-xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
                   <MapPin className="w-6 h-6" />
                 </div>
@@ -91,7 +94,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Yenilənmiş Sosial Media Hissəsi */}
+              {/* Sosial Media Hissəsi */}
               <div className="mt-4 pt-8 border-t border-white/5">
                 <p className="text-slate-600 text-[10px] uppercase tracking-[0.2em] mb-5 font-bold">Social</p>
                 <div className="flex gap-4">

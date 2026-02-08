@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { productsData } from "./productsData";
 import { MessageCircle, Info } from "lucide-react";
+// Analitika funksiyasını import edirik
+import { trackWhatsAppClick } from "@/utils/analytics";
 
 export default function Products() {
   const { lang } = useLanguage();
@@ -22,7 +24,6 @@ export default function Products() {
   const currentProducts = productsData[lang as keyof typeof productsData] || productsData.az;
 
   return (
-    /* scroll-mt-24 əlavə edildi ki, skrol zamanı yuxarıdan boşluq qalsın */
     <section id="products" className="py-20 px-4 scroll-mt-24">
       <div className="container mx-auto">
         <h2 className="text-4xl font-black text-white text-center mb-12 uppercase italic">
@@ -38,6 +39,15 @@ export default function Products() {
               {/* ŞƏKİL HİSSƏSİ */}
               <Link 
                 href={`/products/${product.slug}?lang=${lang}`}
+                // Məhsulun üzərinə klikləməni izləyirik
+                onClick={() => {
+                   if(window.gtag) {
+                     window.gtag('event', 'product_view_click', {
+                       product_name: product.name,
+                       product_slug: product.slug
+                     });
+                   }
+                }}
                 className="relative aspect-square mb-6 overflow-hidden rounded-2xl bg-white flex items-center justify-center group/card border border-white/5 shadow-inner cursor-pointer"
               >
                 <img 
@@ -86,6 +96,8 @@ export default function Products() {
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(product.name + t.waMessage[lang as keyof typeof t.waMessage])}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  // Hansı məhsul üçün WhatsApp-a keçid edildiyini izləyirik
+                  onClick={() => trackWhatsAppClick(`Product: ${product.name}`)}
                   className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-green-900/20 border-b-4 border-green-700 hover:border-green-600"
                 >
                   <MessageCircle className="w-5 h-5" />

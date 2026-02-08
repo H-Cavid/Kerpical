@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "./LanguageContext";
 import { MessageCircle, RotateCcw, ChevronDown, Hash, Layers, Ruler, GanttChartSquare } from "lucide-react";
+// Analitika funksiyalarını import edirik
+import { trackWhatsAppClick, trackCalculatorUse } from "@/utils/analytics";
 
 interface BrickType {
   name: Record<string, string>;
@@ -89,7 +91,13 @@ export default function Calculator() {
     }
 
     if (wallType === "double") count *= 2;
-    setResult(Math.ceil(count));
+    const finalResult = Math.ceil(count);
+    setResult(finalResult);
+
+    // Kalkulyatordan istifadə edildikdə analitikaya göndər (yalnız rəqəm 0-dan böyükdürsə)
+    if (finalResult > 0) {
+      trackCalculatorUse(finalResult, numArea);
+    }
   }, [area, type, mode, wallType]);
 
   const wallLabel = wallType === "single" ? (lang === "az" ? "tək qat" : lang === "ru" ? "одинарный" : "single layer") : (lang === "az" ? "qoşa qat" : lang === "ru" ? "двойной" : "double layer");
@@ -192,6 +200,7 @@ export default function Calculator() {
                 <a
                   href={`https://wa.me/994776235836?text=${encodeURIComponent(whatsappMessage)}`}
                   target="_blank"
+                  onClick={() => trackWhatsAppClick("Calculator Sifariş")}
                   className="w-full bg-green-600 hover:bg-green-500 py-4 rounded-xl flex items-center justify-center gap-2 font-black text-base transition-all shadow-lg shadow-green-600/20 active:scale-95"
                 >
                   <MessageCircle className="w-5 h-5" />
