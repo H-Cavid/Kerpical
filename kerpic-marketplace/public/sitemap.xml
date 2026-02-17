@@ -6,119 +6,119 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>https://www.kerpical.az/</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-8-5?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-8-5?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-8-5?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-10-5?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-8-5?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-10-5?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-8-5?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-10-5?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-13-5?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-13-5?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-19-19-13-5?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-8-5?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-29-19-19?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-10-5?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-29-19-19?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-10-5?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-29-19-19?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-39-19-19?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-39-19-19?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.kerpical.az/products/kerpic-39-19-19?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-10-5?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-saxta?lang=az</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-13-5?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-saxta?lang=ru</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-13-5?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.kerpical.az/products/kerpic-saxta?lang=en</loc>
-    <lastmod>2026-02-08T15:14:19+00:00</lastmod>
+    <loc>https://kerpical.az/products/kerpic-19-19-13-5?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://kerpical.az/products/kerpic-29-19-19?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-29-19-19?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-29-19-19?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://kerpical.az/products/kerpic-39-19-19?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-39-19-19?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-39-19-19?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://kerpical.az/products/kerpic-saxta?lang=az</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-saxta?lang=ru</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://kerpical.az/products/kerpic-saxta?lang=en</loc>
+    <lastmod>2026-02-17T15:14:19+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 
